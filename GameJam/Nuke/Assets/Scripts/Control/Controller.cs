@@ -1,10 +1,10 @@
 using UnityEngine;
 
 namespace Game.Control
-{       
+{
     public class Controller : MonoBehaviour {
-        public int numberOfExploredShips;
-        public int numberOfResources;
-        public int currentPoint;        
+        [SerializeReference] public int numberOfExploredShips;
+        [SerializeReference] public int numberOfResources;
+        [SerializeReference] public int currentPoint;
     }
 }

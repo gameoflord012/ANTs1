@@ -4,7 +4,7 @@ using Game.Core;
 
 namespace Game.Control
 {
-    public class PlayerController : MonoBehaviour, Controller {
+    public class PlayerController : Controller {
         [SerializeField] Projectile projectilePrefab;
 
         private void Update()

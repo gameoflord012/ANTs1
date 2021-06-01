@@ -4,6 +4,6 @@ namespace Game.Combat
 {
     [RequireComponent(typeof(Health))]
     [RequireComponent(typeof(Fighter))]
-    public class CombatTarget : MonoBehaviour {               
+    public class CombatTarget : MonoBehaviour {
     }
 }

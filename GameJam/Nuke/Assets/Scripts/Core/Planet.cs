@@ -6,8 +6,8 @@ namespace Game.Core
 {
     [RequireComponent(typeof(CombatTarget))]
     public class Planet : MonoBehaviour {
-        [SerializeField] int numberOfNukeSlots;
-        [SerializeField] int resorceGatherRate;
+        [SerializeField] int numberOfNukeSlots = 3;
+        [SerializeField] int resorceGatherRate = 5;
         public Controller owner;
         public bool isViewable;
 
@@ -23,7 +23,8 @@ namespace Game.Core
         }
 
         private void Update() {
-            currentState.OnStateUpdate();
+            if(currentState != null)
+                currentState.OnStateUpdate();
 
             if(owner != null)
                 GainResource();
@@ -39,8 +40,10 @@ namespace Game.Core
         private void GainResource()
         {
             if(timeSinceLastGainResources > 1.0f)
+            {
                 owner.numberOfResources += resorceGatherRate;
-            timeSinceLastGainResources = 0f;
+                timeSinceLastGainResources = 0f;
+            }
         }
     }    
 
