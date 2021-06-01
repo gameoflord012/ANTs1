@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Game.Core;
+using UnityEngine;
 
 namespace Game.Global
 {
@@ -8,5 +9,7 @@ namespace Game.Global
 
         public const int MAX_CONTROLLER = 100;
         public const int DEFAULT_PLAYER_ID = 0;
+
+        public Planet[] Planets;
     }
 }

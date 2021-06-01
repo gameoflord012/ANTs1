@@ -5,7 +5,7 @@ using Game.Core;
 namespace Game.Control
 {
     public class PlayerController : Controller {
-        [SerializeField] Projectile projectilePrefab;
+        [SerializeField] Projectile projectilePrefab;        
 
         private void Update()
         {
@@ -17,21 +17,22 @@ namespace Game.Control
 
         private void AttackBehaviour()
         {
-            Transform target = GetMouseTarget();
+            Transform target = GetMouseTarget();            
             if (!IsAttackable(target)) return;
             DoAttack(target);
         }
 
         private void DoAttack(Transform target)
         {
-            transform.GetComponent<Fighter>().AttackTo(target.GetComponent<CombatTarget>(), projectilePrefab);
+            GetFighter().AttackTo(target.GetComponent<CombatTarget>(), projectilePrefab);
         }
 
         private bool IsAttackable(Transform target) {
             if(target == null) return false;
 
             // Check is enemy target
-            if(target.transform.GetComponent<Planet>().owner == (Controller) this) return false;
+            Planet targetPlanet = target.transform.GetComponent<Planet>();
+            if(targetPlanet.owner == null || targetPlanet.owner == this) return false;
 
             return true;
         }

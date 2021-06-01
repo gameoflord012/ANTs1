@@ -8,14 +8,16 @@ namespace Game.Core
     [RequireComponent(typeof(CombatTarget))]
     public class Planet : MonoBehaviour {
         [SerializeField] int maxNukeSlot = 3;
-        [SerializeField] int resorceGatherRate = 5;
+        [SerializeField] public int resorceGatherRate = 5;
         [SerializeField] float nukeRespawnTime = 1f;
+        [SerializeField] int healRate = 5;
 
-        public Controller owner;        
+        public Controller owner;
         public int numberOfCurrentNuke = 3;
 
         float timeSinceLastGainResources = Mathf.Infinity;        
         float timeSinceLastGainNuke = Mathf.Infinity;
+        float timeSinceLastHeal = Mathf.Infinity;
 
         PlanetState[] currentStates = new PlanetState[Vars.MAX_CONTROLLER];
         public bool[] isVisible = new bool[Vars.MAX_CONTROLLER];
@@ -41,13 +43,23 @@ namespace Game.Core
                 DeathBehaviour();
             }
 
+            HealPlanet();
+
             UpdateTimer();
         }
 
-        private void DeathBehaviour()
+        private void HealPlanet()
         {
-            owner = GetComponent<CombatTarget>().LastAttacker;
-            ChangeState(owner.id, new Owned(this));
+            if(timeSinceLastHeal > 1.0f)
+            {
+                GetComponent<Health>().GainHealth(healRate);
+                timeSinceLastHeal = 0;
+            }                
+        }
+
+        private void DeathBehaviour()
+        {            
+            ChangeState(owner.id, new Owned(this, GetComponent<CombatTarget>().LastAttacker));
         }
 
         private void GainNuke()
@@ -63,6 +75,7 @@ namespace Game.Core
         {
             timeSinceLastGainResources += Time.deltaTime;
             timeSinceLastGainNuke += Time.deltaTime;
+            timeSinceLastHeal += Time.deltaTime;
         }
 
         private void GainResource()
@@ -97,19 +110,24 @@ namespace Game.Core
 
         public void OnStateExit()
         {
+            planet.isVisible[index] = true;
         }
     }
 
     public class Owned : PlanetState
     {
         Planet planet;
+        Controller controller;
 
-        public Owned(Planet planet) {
+        public Owned(Planet planet, Controller controller) {
             this.planet = planet;
+            this.controller = controller;
         }
 
         public void OnStateEnter()
         {
+            planet.owner = controller;
+
             for (int i = 0; i < Vars.MAX_CONTROLLER; i++)
             {
                 if (i != GetOwnerId())
