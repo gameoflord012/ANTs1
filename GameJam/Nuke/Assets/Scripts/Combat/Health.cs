@@ -6,10 +6,11 @@ namespace Game.Combat
 
         public void DealDamage(int damage)
         {
+            if(IsDead()) return;
             health = Mathf.Max(0, health - damage);
         }
 
-        public bool isDead()
+        public bool IsDead()
         {
             return health == 0;
         }

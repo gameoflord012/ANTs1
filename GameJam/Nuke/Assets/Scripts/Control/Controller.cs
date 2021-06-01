@@ -6,5 +6,6 @@ namespace Game.Control
         [SerializeReference] public int numberOfExploredShips;
         [SerializeReference] public int numberOfResources;
         [SerializeReference] public int currentPoint;
+        [SerializeReference] public int id;
     }
 }
