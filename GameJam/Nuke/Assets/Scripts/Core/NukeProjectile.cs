@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
-using Game.Combat;
 using Game.Global;
 using Game.AI;
+using Game.Core;
 
-namespace Game.Core
+namespace Game.Combat
 {
     public class NukeProjectile : Projectile
     {        
@@ -16,7 +16,7 @@ namespace Game.Core
 
         protected override void LoadStrategy()
         {
-            pathStrategy = new BasicPathStrategy(rb, target, tiltSpeed);
+            pathStrategy = new KhoiPathStrategy(rb, target, tiltSpeed);
         }
 
         protected override void Update() {

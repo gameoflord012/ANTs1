@@ -37,9 +37,33 @@ namespace Game.Global
             return false;            
         }
 
-        public static int GetControllerId(MonoBehaviour holder)
+        public static int GetControllerId(Transform transform)
         {
-            return holder.transform.GetComponent<Planet>().owner.id;
+            return transform.GetComponent<Planet>().owner.id;
+        }
+
+        public static Controller GetController(Transform transform)
+        {
+            return transform.GetComponent<Planet>().owner;
+        }
+
+        public static bool IsPlanetAttackable(Transform t, int id)
+        {
+            return t.GetComponent<Planet>().IsAttackable(id);
+        }
+
+        public static bool DecreasePlanetNukeNumber(Transform t)
+        {
+            Planet planet = t.GetComponent<Planet>();
+            if (planet.numberOfCurrentNukes == 0) return false;
+            planet.numberOfCurrentNukes--;
+            return true;
+        }
+
+        public static void FireProjectile(Transform source, Transform target, Transform projectilePrefab)
+        {
+            Projectile projectile = Instantiate(projectilePrefab.GetComponent<Projectile>(), source.position, Quaternion.identity);
+            projectile.Init(source, target);
         }
     }
 }

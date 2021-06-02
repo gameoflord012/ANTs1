@@ -14,22 +14,26 @@ namespace Game.Control
             this.id = 1;
         }
 
-        private void Start() {            
+        private void Start() {                        
             
-            foreach(Planet planet in Utils.GetEnemyPlanets(id))
-            {
-                GetExplorer().ExploreTo(planet.GetComponent<Planet>(), explorerProjectilePrefab);
-                break;
-            }
         }
 
         private void Update() {
             List<Planet> planets = Utils.GetEnemyPlanets(id);
+
+            foreach(Planet planet in Utils.GetEnemyPlanets(id))
+            {
+                if(planet.IsExplorable(id))
+                {
+                    GetExplorer().ExploreTo(planet.GetComponent<Planet>(), explorerProjectilePrefab);                    
+                }
+            }
+
             foreach(Planet planet in planets)
             {
                 if(planet.IsAttackable(id))
                 {
-                    GetFighter().AttackTo(planet.GetComponent<CombatTarget>(), nukeProjectilePrefab);
+                    GetFighter().AttackTo(planet.GetComponent<CombatTarget>(), nukeProjectilePrefab.transform);
                     break;
                 }
             }

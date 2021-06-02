@@ -126,8 +126,8 @@ namespace Game.Core
 
     public class PlanetUnexplored : IPlanetState
     {
-        Planet planet;
-        int index;
+        readonly Planet planet;
+        readonly int index;
         public PlanetUnexplored(Planet planet, int index) {
             this.planet = planet;
             this.index = index;
@@ -146,8 +146,8 @@ namespace Game.Core
 
     public class PlanetExplored : IPlanetState
     {
-        Planet planet;
-        Controller controller;
+        readonly Planet planet;
+        readonly Controller controller;
         public PlanetExplored(Planet planet, Controller controller) {
             this.planet = planet;
             this.controller = controller;
@@ -193,8 +193,8 @@ namespace Game.Core
 
     public class PlanetOwned : IPlanetState
     {
-        Planet planet;
-        Controller controller;
+        readonly Planet planet;
+        readonly Controller controller;
 
         public PlanetOwned(Planet planet, Controller controller) {
             this.planet = planet;

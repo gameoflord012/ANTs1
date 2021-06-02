@@ -1,7 +1,5 @@
-using System;
-using Game.Control;
 using UnityEngine;
-
+using Game.Control;
 namespace Game.Core
 {
     public class Explorer : MonoBehaviour {

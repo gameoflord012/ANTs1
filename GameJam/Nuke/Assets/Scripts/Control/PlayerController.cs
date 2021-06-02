@@ -2,7 +2,6 @@
 using Game.Core;
 using Game.Global;
 using Game.Combat;
-using System;
 
 namespace Game.Control
 {
@@ -55,7 +54,8 @@ namespace Game.Control
         private void DoAttack(Planet target)
         {
             if(GetFighter() == null || target == null) return;
-            GetFighter().AttackTo(target.GetComponent<CombatTarget>(), nukeProjectilePrefab);
+            Debug.Log("pass1");
+            GetFighter().AttackTo(target.GetComponent<CombatTarget>(), nukeProjectilePrefab.transform);
         }
 
         private Planet GetMouseTouchPlanet()
