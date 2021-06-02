@@ -2,6 +2,7 @@
 using Game.Core;
 using Game.Combat;
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace Game.Control
 {
@@ -13,10 +14,11 @@ namespace Game.Control
         }
 
         private void Update() {
-            foreach(Planet planet in Utils.GetEnemyPlanets(id))
-            {
-                GetFighter().AttackTo(planet.transform.GetComponent<CombatTarget>(), projectilePrefab);
-            }
+            // foreach(Planet planet in Utils.GetEnemyPlanets(id))
+            // {
+            //     GetFighter().AttackTo(planet.transform, projectilePrefab);
+            //     break;
+            // }
         }
     }
 }

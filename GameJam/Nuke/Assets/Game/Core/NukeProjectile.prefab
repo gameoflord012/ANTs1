@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4435339458968753292}
   - component: {fileID: 4435339458968753293}
-  - component: {fileID: 4435339458968753294}
   - component: {fileID: 2290984219602035925}
   - component: {fileID: -2197064452024069453}
+  - component: {fileID: 5394523674457466039}
   m_Layer: 0
   m_Name: Projectile
   m_TagString: Untagged
@@ -84,21 +84,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4435339458968753294
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4435339458968753295}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4dbd5ebd2712564aa20f8dd2fec063d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tiltSpeed: 10
-  target: {fileID: 0}
-  damage: 10
 --- !u!60 &2290984219602035925
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -148,3 +133,17 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &5394523674457466039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4435339458968753295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f05aaa15fc515e4ca9bd36ab9988c59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tiltSpeed: 10
+  damage: 10

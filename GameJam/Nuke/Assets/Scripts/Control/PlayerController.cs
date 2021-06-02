@@ -1,40 +1,45 @@
 ﻿using UnityEngine;
-using Game.Combat;
 using Game.Core;
+using Game.Global;
 
 namespace Game.Control
 {
     public class PlayerController : Controller {
-        [SerializeField] Projectile projectilePrefab;        
+        [SerializeField] Projectile nukeProjectilePrefab;
+        [SerializeField] Projectile explorerProjectilePrefab;
+        private void Start() {
+            this.id = Vars.DEFAULT_PLAYER_ID;
+        }
 
         private void Update()
         {
-            if(Input.GetMouseButtonDown(0))
+            if(Input.GetKeyDown(KeyCode.A))
             {
                 AttackBehaviour();
             }
+
+            if(Input.GetKeyDown(KeyCode.S))
+            {
+                ExploreBehaviour();
+            }
+        }
+
+        private void ExploreBehaviour()
+        {
+            Transform target = GetMouseTarget();
+            GetExplorer().ExploreTo(target, explorerProjectilePrefab);
         }
 
         private void AttackBehaviour()
         {
             Transform target = GetMouseTarget();            
-            if (!IsAttackable(target)) return;
             DoAttack(target);
         }
 
         private void DoAttack(Transform target)
         {
-            GetFighter().AttackTo(target.GetComponent<CombatTarget>(), projectilePrefab);
-        }
-
-        private bool IsAttackable(Transform target) {
-            if(target == null) return false;
-
-            // Check is enemy target
-            Planet targetPlanet = target.transform.GetComponent<Planet>();
-            if(targetPlanet.owner == null || targetPlanet.owner == this) return false;
-
-            return true;
+            if(GetFighter() == null) return;
+            GetFighter().AttackTo(target, nukeProjectilePrefab);
         }
 
         private Transform GetMouseTarget()

@@ -5,12 +5,29 @@ using Game.Control;
 namespace Game.Combat
 {
     [RequireComponent(typeof(Planet))]
-    public class Fighter : MonoBehaviour {
-        public void AttackTo(CombatTarget target, Projectile projectilePrefab)
+    public class Fighter : MonoBehaviour {        
+        public void AttackTo(Transform target, Projectile projectilePrefab)
         {
-            if(CheckForAvaiableNuke() == false) return;
+            if (!IsAttackable(target)) return;
+            if (CheckForAvaiableNuke() == false) return;
+
             FireProjectile(target, projectilePrefab);
-            target.LastAttacker = GetComponent<Planet>().owner;            
+            UpdateLastAttacker(target.GetComponent<CombatTarget>());
+        }
+
+        private void UpdateLastAttacker(CombatTarget target)
+        {
+            target.LastAttacker = GetComponent<Planet>().owner;
+        }
+
+        private bool IsAttackable(Transform target) {
+            if(target == null) return false;
+
+            // Check is enemy target
+            Planet targetPlanet = target.transform.GetComponent<Planet>();
+            if(targetPlanet.owner == null || targetPlanet.owner == GetComponent<Planet>().owner) return false;
+
+            return true;
         }
 
         private bool CheckForAvaiableNuke()
@@ -21,10 +38,10 @@ namespace Game.Combat
             return true;
         }
 
-        private void FireProjectile(CombatTarget target, Projectile projectilePrefab)
+        private void FireProjectile(Transform target, Projectile projectilePrefab)
         {
             Projectile projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
-            projectile.target = target.transform;
+            projectile.Init(this.transform, target);
         }
     }
 }

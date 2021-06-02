@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
-using Game.Core;
-namespace Game.Combat
+using Game.Combat;
+
+namespace Game.Core
 {
     public class NukeProjectile : Projectile
     {

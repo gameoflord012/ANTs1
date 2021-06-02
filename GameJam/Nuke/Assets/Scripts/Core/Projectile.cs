@@ -4,9 +4,18 @@ namespace Game.Core
 {
     [RequireComponent(typeof(Rigidbody2D))]
     public abstract class Projectile : MonoBehaviour {
-        [SerializeField] float tiltSpeed = 0.1f;      
-        public Transform target;
+        [SerializeField] float tiltSpeed = 10f;
+        
+        protected Transform target;
+        protected Transform source;
+
         Rigidbody2D rb;
+
+        public void Init(Transform source, Transform target)
+        {
+            this.target = target;
+            this.source = source;
+        }
 
         private void Start() {
             rb = GetComponent<Rigidbody2D>();
@@ -14,12 +23,15 @@ namespace Game.Core
 
         private void Update() {
             rb.MovePosition(Vector2.Lerp(GetCurrentPosition(), GetTargetPosition(), tiltSpeed * Time.deltaTime));
-        }        
+        }
 
         private void OnCollisionEnter2D(Collision2D other) {
             if(other.transform != target) return;
+
+            Debug.Log("Yass");
+
             OnProjectileAction();
-            Destroy(gameObject);            
+            Destroy(gameObject);
         }
 
         public abstract void OnProjectileAction();

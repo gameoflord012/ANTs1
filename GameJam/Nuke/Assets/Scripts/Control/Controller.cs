@@ -11,10 +11,18 @@ namespace Game.Control
         [SerializeReference] public int id;
         [SerializeReference] public Planet currentSelectedPlanet;
 
-        protected Fighter GetFighter()
+        protected virtual Fighter GetFighter()
         {
+            
             if(currentSelectedPlanet.owner != this) return null;
             return currentSelectedPlanet.transform.GetComponent<Fighter>();
+        }
+
+        protected virtual Explorer GetExplorer()
+        {
+            
+            if(currentSelectedPlanet.owner != this) return null;
+            return currentSelectedPlanet.transform.GetComponent<Explorer>();
         }
     }
 }
