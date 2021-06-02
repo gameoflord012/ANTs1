@@ -12,7 +12,7 @@ namespace Game.Global
         public static List<Planet> GetEnemyPlanets(int controllerId)
         {
             List<Planet> planets = new List<Planet>();
-            foreach(Planet p in Vars.Instance.Planets)
+            foreach(Planet p in Vars.Instance.planets)
             {
                 if(p.owner == null) continue;
                 if(p.owner.id != controllerId)
