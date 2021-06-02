@@ -1,13 +1,14 @@
 using UnityEngine;
 using Game.Control;
+using Game.Global;
+
 namespace Game.Core
 {
     public class Explorer : MonoBehaviour {
         public void ExploreTo(Planet target, Projectile projectilePrefab)
         {
-            if (!IsExplorable(target)) return;
+            if (!IsExplorable(target)) return;            
             if (!CheckForAvaiableExplorer()) return;            
-            if(!CheckTargetInExploring(target)) return;
             ExploreAction(target, projectilePrefab);
         }
 
@@ -24,6 +25,7 @@ namespace Game.Core
         private bool IsExplorable(Planet target)
         {
             if(target == null) return false;
+            if(!CheckTargetInExploring(target)) return false;
             return target.IsExplorable(GetController().id);
         }
 
@@ -34,10 +36,7 @@ namespace Game.Core
 
         private bool CheckForAvaiableExplorer()
         {
-            int currentNuke = GetComponent<Planet>().numberOfCurrentExplorers;
-            if(currentNuke == 0) return false;
-            GetComponent<Planet>().numberOfCurrentExplorers--;
-            return true;
+            return Utils.DecreasePlanetExplorerNumber(transform);
         }
 
         private void FireProjectile(Transform target, Projectile projectilePrefab)

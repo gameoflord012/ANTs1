@@ -20,9 +20,9 @@ namespace Game.Global
         }
 
         public event Action<Transform> OnNukeCollideEvent;
-        public void OnNukeCollide(Transform transform)
+        public void OnNukeCollides(Transform transform)
         {
-            Debug.Log("Collide");
+            Debug.Log("Collides");
             OnNukeCollideEvent?.Invoke(transform);
         }
     }

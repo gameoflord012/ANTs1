@@ -60,6 +60,15 @@ namespace Game.Global
             return true;
         }
 
+        public static bool DecreasePlanetExplorerNumber(Transform t)
+        {
+            Planet planet = t.GetComponent<Planet>();
+            if (planet.numberOfCurrentExplorers == 0) return false;
+            Debug.Log("count");
+            planet.numberOfCurrentExplorers--;
+            return true;
+        }
+
         public static void FireProjectile(Transform source, Transform target, Transform projectilePrefab)
         {
             Projectile projectile = Instantiate(projectilePrefab.GetComponent<Projectile>(), source.position, Quaternion.identity);

@@ -27,7 +27,7 @@ namespace Game.Combat
         public override void OnProjectileAction()
         {            
             target.transform.GetComponent<Health>().DealDamage(damage);
-            Events.Instance.OnNukeCollide(transform);
+            Events.Instance.OnNukeCollides(transform);
         }
     }
 }
