@@ -27,9 +27,6 @@ namespace Game.Core
 
         private void OnCollisionEnter2D(Collision2D other) {
             if(other.transform != target) return;
-
-            Debug.Log("Yass");
-
             OnProjectileAction();
             Destroy(gameObject);
         }

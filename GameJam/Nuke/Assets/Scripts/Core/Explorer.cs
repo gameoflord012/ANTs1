@@ -6,9 +6,6 @@ namespace Game.Core
         public void ExploreTo(Transform target, Projectile projectilePrefab)
         {
             if (!IsExplorable(target)) return;
-
-            Debug.Log("Is explorable");
-
             if (!CheckForAvaiableExplorer()) return;
 
             FireProjectile(target, projectilePrefab);

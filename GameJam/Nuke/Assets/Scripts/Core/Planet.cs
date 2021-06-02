@@ -130,22 +130,27 @@ namespace Game.Core
 
         public void OnStateExit()
         {
-            planet.isVisible[index] = true;
+            
         }
     }
 
     public class PlanetExplored : IPlanetState
     {
+        Planet planet;
+        int index;
+        public PlanetExplored(Planet planet, int index) {
+            this.planet = planet;
+            this.index = index;
+        }
 
-        public PlanetExplored() { }
         public void OnStateEnter()
         {
-            throw new System.NotImplementedException();
+            planet.isVisible[index] = true;
         }
 
         public void OnStateExit()
         {
-            throw new System.NotImplementedException();
+
         }
     }
 

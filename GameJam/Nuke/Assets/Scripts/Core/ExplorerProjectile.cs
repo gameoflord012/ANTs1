@@ -5,7 +5,10 @@ namespace Game.Core
     public class ExplorerProjectile : Projectile {
         public override void OnProjectileAction()
         {
-            GetTargetPlanet().ChangeState(GetSourceControllerId(), new PlanetExplored());
+            GetTargetPlanet().ChangeState(
+                GetSourceControllerId(), 
+                new PlanetExplored(GetTargetPlanet(), GetSourceControllerId())
+            );
         }
 
         private Planet GetTargetPlanet()
@@ -15,7 +18,7 @@ namespace Game.Core
 
         private int GetSourceControllerId()
         {
-            return source.GetComponent<Controller>().id;
+            return source.GetComponent<Planet>().owner.id;
         }
     }
 }
