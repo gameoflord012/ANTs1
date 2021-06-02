@@ -1,3 +1,5 @@
+using System;
+using Game.Control;
 using UnityEngine;
 
 namespace Game.Core
@@ -5,23 +7,37 @@ namespace Game.Core
     public class Explorer : MonoBehaviour {
         public void ExploreTo(Transform target, Projectile projectilePrefab)
         {
-            if (!IsExplorable(target)) return;
+            if (!IsExplorable(GetTargetPlanet(target))) return;
             if (!CheckForAvaiableExplorer()) return;
+            if(!CheckTargetInExploring(GetTargetPlanet(target)))
+            ExploreAction(target, projectilePrefab);
+        }
 
+        private bool CheckTargetInExploring(Planet target)
+        {
+            return GetController().currentExploringPlanet.Contains(target);
+        }
+
+        private void ExploreAction(Transform target, Projectile projectilePrefab)
+        {
+            GetController().currentExploringPlanet.Add(GetTargetPlanet(target));
             FireProjectile(target, projectilePrefab);
         }
 
-        private bool IsExplorable(Transform target)
+        private static Planet GetTargetPlanet(Transform target)
         {
-            if (target == null) return false;
-
-            Planet targetPlanet = target.GetComponent<Planet>();
-            return targetPlanet.IsExplorable(GetControllerId());
+            return target.GetComponent<Planet>();
         }
 
-        private int GetControllerId()
+        private bool IsExplorable(Planet target)
         {
-            return GetComponent<Planet>().owner.id;
+            if (target == null) return false;
+            return target.IsExplorable(GetController().id);
+        }
+
+        private Controller GetController()
+        {
+            return GetComponent<Planet>().owner;
         }
 
         private bool CheckForAvaiableExplorer()

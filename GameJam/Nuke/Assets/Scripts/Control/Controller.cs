@@ -1,6 +1,7 @@
 using UnityEngine;
 using Game.Core;
 using Game.Combat;
+using System.Collections.Generic;
 
 namespace Game.Control
 {
@@ -11,6 +12,8 @@ namespace Game.Control
         [SerializeReference] public int id;
         [SerializeReference] public Planet currentSelectedPlanet;
 
+        public List<Planet> currentExploringPlanet;
+
         protected virtual Fighter GetFighter()
         {
             
@@ -19,8 +22,7 @@ namespace Game.Control
         }
 
         protected virtual Explorer GetExplorer()
-        {
-            
+        {            
             if(currentSelectedPlanet.owner != this) return null;
             return currentSelectedPlanet.transform.GetComponent<Explorer>();
         }
