@@ -1,15 +1,26 @@
 ﻿using UnityEngine;
+using Game.AI;
 
 namespace Game.Core
 {
     [RequireComponent(typeof(Rigidbody2D))]
     public abstract class Projectile : MonoBehaviour {
-        [SerializeField] float tiltSpeed = 10f;
-        
+        [SerializeField] protected float tiltSpeed = 10f;
+        protected Rigidbody2D rb;
+
         protected Transform target;
         protected Transform source;
+        
+        protected IProjectilePathStrategy pathStrategy;
 
-        Rigidbody2D rb;
+        private void Awake() {
+            rb = GetComponent<Rigidbody2D>();
+        }
+
+        protected virtual void Start() {
+            Debug.Log("Strategy Loaded");
+            LoadStrategy();
+        }
 
         public void Init(Transform source, Transform target)
         {
@@ -17,12 +28,13 @@ namespace Game.Core
             this.source = source;
         }
 
-        private void Start() {
-            rb = GetComponent<Rigidbody2D>();
+        protected virtual void LoadStrategy()
+        {
+            pathStrategy = new BasicPathStrategy(rb, target, tiltSpeed);
         }
 
-        private void Update() {
-            rb.MovePosition(Vector2.Lerp(GetCurrentPosition(), GetTargetPosition(), tiltSpeed * Time.deltaTime));
+        protected virtual void Update() {
+            pathStrategy.UpdatePath();
         }
 
         private void OnCollisionEnter2D(Collision2D other) {
@@ -32,15 +44,5 @@ namespace Game.Core
         }
 
         public abstract void OnProjectileAction();
-
-        Vector2 GetTargetPosition()
-        {
-            return new Vector2(target.position.x, target.position.y);
-        }
-
-        Vector2 GetCurrentPosition()
-        {
-            return new Vector2(transform.position.x, transform.position.y);
-        }
-    }
+    }     
 }

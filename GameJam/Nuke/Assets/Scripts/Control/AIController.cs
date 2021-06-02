@@ -7,18 +7,32 @@ using System.Collections.Generic;
 namespace Game.Control
 {
     public class AIController : Controller {
-        [SerializeField] Projectile projectilePrefab;        
+        [SerializeField] Projectile nukeProjectilePrefab; 
+        [SerializeField] Projectile explorerProjectilePrefab;
 
-        private void Start() {
+        private void Awake() {
             this.id = 1;
         }
 
+        private void Start() {            
+            
+            foreach(Planet planet in Utils.GetEnemyPlanets(id))
+            {
+                GetExplorer().ExploreTo(planet.GetComponent<Planet>(), explorerProjectilePrefab);
+                break;
+            }
+        }
+
         private void Update() {
-            // foreach(Planet planet in Utils.GetEnemyPlanets(id))
-            // {
-            //     GetFighter().AttackTo(planet.transform, projectilePrefab);
-            //     break;
-            // }
+            List<Planet> planets = Utils.GetEnemyPlanets(id);
+            foreach(Planet planet in planets)
+            {
+                if(planet.IsAttackable(id))
+                {
+                    GetFighter().AttackTo(planet.GetComponent<CombatTarget>(), nukeProjectilePrefab);
+                    break;
+                }
+            }
         }
     }
 }

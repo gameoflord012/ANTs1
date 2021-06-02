@@ -5,33 +5,27 @@ using UnityEngine;
 namespace Game.Core
 {
     public class Explorer : MonoBehaviour {
-        public void ExploreTo(Transform target, Projectile projectilePrefab)
+        public void ExploreTo(Planet target, Projectile projectilePrefab)
         {
-            if (!IsExplorable(GetTargetPlanet(target))) return;
-            if (!CheckForAvaiableExplorer()) return;
-            if(!CheckTargetInExploring(GetTargetPlanet(target)))
+            if (!IsExplorable(target)) return;
+            if (!CheckForAvaiableExplorer()) return;            
+            if(!CheckTargetInExploring(target)) return;
             ExploreAction(target, projectilePrefab);
         }
 
         private bool CheckTargetInExploring(Planet target)
         {
-            return GetController().currentExploringPlanet.Contains(target);
+            return !GetController().currentExploringPlanets.Contains(target);
         }
 
-        private void ExploreAction(Transform target, Projectile projectilePrefab)
+        private void ExploreAction(Planet target, Projectile projectilePrefab)
         {
-            GetController().currentExploringPlanet.Add(GetTargetPlanet(target));
-            FireProjectile(target, projectilePrefab);
+            GetController().AddToExploringList(target);
+            FireProjectile(target.transform, projectilePrefab);
         }
-
-        private static Planet GetTargetPlanet(Transform target)
-        {
-            return target.GetComponent<Planet>();
-        }
-
         private bool IsExplorable(Planet target)
         {
-            if (target == null) return false;
+            if(target == null) return false;
             return target.IsExplorable(GetController().id);
         }
 
@@ -42,9 +36,9 @@ namespace Game.Core
 
         private bool CheckForAvaiableExplorer()
         {
-            int currentNuke = GetComponent<Planet>().numberOfCurrentExplorer;
+            int currentNuke = GetComponent<Planet>().numberOfCurrentExplorers;
             if(currentNuke == 0) return false;
-            GetComponent<Planet>().numberOfCurrentExplorer--;
+            GetComponent<Planet>().numberOfCurrentExplorers--;
             return true;
         }
 

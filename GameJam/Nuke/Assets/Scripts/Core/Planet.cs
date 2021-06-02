@@ -14,20 +14,22 @@ namespace Game.Core
         [SerializeField] int healRate = 5;        
 
         public Controller owner;
-        public int numberOfCurrentNuke = 3;
-        public int numberOfCurrentExplorer = 3;
+        public int numberOfCurrentNukes = 3;
+        public int numberOfCurrentExplorers = 3;
 
         float timeSinceLastGainResources = Mathf.Infinity;        
         float timeSinceLastGainNuke = Mathf.Infinity;
         float timeSinceLastHeal = Mathf.Infinity;
 
-        IPlanetState[] currentStates = new IPlanetState[Vars.MAX_CONTROLLER];
+        public IPlanetState[] currentStates = new IPlanetState[Vars.MAX_CONTROLLER];
+        IPlanetState[] lastStates = new IPlanetState[Vars.MAX_CONTROLLER];
+
         public bool[] isVisible = new bool[Vars.MAX_CONTROLLER];
 
         private void Start() 
         {
             if(owner == null)
-            {
+            {                
                 for(int i = 0; i < Vars.MAX_CONTROLLER; i++)
                     ChangeState(i, new PlanetUnexplored(this, i));                    
             }
@@ -40,15 +42,23 @@ namespace Game.Core
         public void ChangeState(int id, IPlanetState state)
         {            
             if(currentStates[id] != null)
+            {
                 currentStates[id].OnStateExit();
+                lastStates[id] = currentStates[id];
+            }                
                 
             currentStates[id] = state;
             currentStates[id].OnStateEnter();
         }
 
         public bool IsExplorable(int id)
-        {
+        {            
             return currentStates[id].GetType() == typeof(PlanetUnexplored);
+        }
+
+        public bool IsAttackable(int id)
+        {
+            return currentStates[id].GetType() == typeof(PlanetOccupied);
         }
 
         private void Update() {
@@ -86,7 +96,7 @@ namespace Game.Core
         {
             if(timeSinceLastGainNuke > nukeRespawnTime)
             {
-                numberOfCurrentNuke = Mathf.Min(numberOfCurrentNuke + 1, maxNukeSlot);
+                numberOfCurrentNukes = Mathf.Min(numberOfCurrentNukes + 1, maxNukeSlot);
                 timeSinceLastGainNuke = 0;
             }
         }
@@ -137,20 +147,47 @@ namespace Game.Core
     public class PlanetExplored : IPlanetState
     {
         Planet planet;
-        int index;
-        public PlanetExplored(Planet planet, int index) {
+        Controller controller;
+        public PlanetExplored(Planet planet, Controller controller) {
             this.planet = planet;
-            this.index = index;
+            this.controller = controller;
         }
 
         public void OnStateEnter()
         {
-            planet.isVisible[index] = true;
+            planet.isVisible[controller.id] = true;
+            if(planet.owner != null)
+            {
+                planet.ChangeState(controller.id, new PlanetOccupied(planet));
+            }
+            else
+            {
+                planet.ChangeState(controller.id, new PlanetOwned(planet, controller));
+            }
         }
 
         public void OnStateExit()
         {
 
+        }
+    }
+
+    public class PlanetOccupied : IPlanetState
+    {
+        Planet planet;
+        public PlanetOccupied(Planet planet)
+        {
+            this.planet = planet;
+        }
+
+        public void OnStateEnter()
+        {
+            
+        }
+
+        public void OnStateExit()
+        {
+            
         }
     }
 
@@ -170,16 +207,11 @@ namespace Game.Core
 
             for (int i = 0; i < Vars.MAX_CONTROLLER; i++)
             {
-                if (i != GetOwnerId())
+                if (i != controller.id)
                 {
                     planet.ChangeState(i, new PlanetUnexplored(planet, i));
                 }
             }
-        }
-
-        private int GetOwnerId()
-        {
-            return planet.owner.id;
         }
 
         public void OnStateExit()

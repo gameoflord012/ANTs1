@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 using Game.Core;
 using Game.Control;
 using Game.Combat;
@@ -34,6 +35,11 @@ namespace Game.Global
             resourceRate = 0;
             owner = null;
             return false;            
+        }
+
+        public static int GetControllerId(MonoBehaviour holder)
+        {
+            return holder.transform.GetComponent<Planet>().owner.id;
         }
     }
 }

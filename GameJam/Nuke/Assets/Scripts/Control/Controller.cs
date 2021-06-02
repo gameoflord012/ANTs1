@@ -2,17 +2,17 @@ using UnityEngine;
 using Game.Core;
 using Game.Combat;
 using System.Collections.Generic;
+using System;
 
 namespace Game.Control
 {
     public class Controller : MonoBehaviour {
-        [SerializeReference] public int numberOfExploredShips;
         [SerializeReference] public int numberOfResources;
         [SerializeReference] public int currentPoint;
         [SerializeReference] public int id;
         [SerializeReference] public Planet currentSelectedPlanet;
 
-        public List<Planet> currentExploringPlanet;
+        public List<Planet> currentExploringPlanets;
 
         protected virtual Fighter GetFighter()
         {
@@ -25,6 +25,16 @@ namespace Game.Control
         {            
             if(currentSelectedPlanet.owner != this) return null;
             return currentSelectedPlanet.transform.GetComponent<Explorer>();
+        }
+
+        public void AddToExploringList(Planet target)
+        {
+            currentExploringPlanets.Add(target);
+        }
+
+        public void RemoveFromExploringList(Planet target)
+        {
+            currentExploringPlanets.Remove(target);
         }
     }
 }

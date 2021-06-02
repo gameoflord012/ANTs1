@@ -1,17 +1,16 @@
 ﻿using UnityEngine;
 using Game.Core;
-using Game.Control;
+using Game.Global;
 
 namespace Game.Combat
 {
     [RequireComponent(typeof(Planet))]
     public class Fighter : MonoBehaviour {        
-        public void AttackTo(Transform target, Projectile projectilePrefab)
+        public void AttackTo(CombatTarget target, Projectile projectilePrefab)
         {
             if (!IsAttackable(target)) return;
             if (CheckForAvaiableNuke() == false) return;
-
-            FireProjectile(target, projectilePrefab);
+            FireProjectile(target.transform, projectilePrefab);
             UpdateLastAttacker(target.GetComponent<CombatTarget>());
         }
 
@@ -20,21 +19,17 @@ namespace Game.Combat
             target.LastAttacker = GetComponent<Planet>().owner;
         }
 
-        private bool IsAttackable(Transform target) {
-            if(target == null) return false;
-
+        private bool IsAttackable(CombatTarget target) {
             // Check is enemy target
-            Planet targetPlanet = target.transform.GetComponent<Planet>();
-            if(targetPlanet.owner == null || targetPlanet.owner == GetComponent<Planet>().owner) return false;
-
-            return true;
-        }
+            if(target == null) return false;
+            return target.GetComponent<Planet>().IsAttackable(Utils.GetControllerId(GetComponent<Planet>()));
+        }        
 
         private bool CheckForAvaiableNuke()
         {
-            int currentNuke = GetComponent<Planet>().numberOfCurrentNuke;
+            int currentNuke = GetComponent<Planet>().numberOfCurrentNukes;
             if(currentNuke == 0) return false;
-            GetComponent<Planet>().numberOfCurrentNuke--;
+            GetComponent<Planet>().numberOfCurrentNukes--;
             return true;
         }
 
