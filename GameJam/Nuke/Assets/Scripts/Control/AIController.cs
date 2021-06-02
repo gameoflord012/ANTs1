@@ -7,7 +7,7 @@ using System.Collections.Generic;
 namespace Game.Control
 {
     public class AIController : Controller {
-        [SerializeField] Projectile nukeProjectilePrefab; 
+        [SerializeField] Projectile nukeProjectilePrefab;
         [SerializeField] Projectile explorerProjectilePrefab;
 
         private void Awake() {
@@ -21,7 +21,7 @@ namespace Game.Control
             {
                 if(planet.IsExplorable(id))
                 {
-                    GetExplorer().ExploreTo(planet.GetComponent<Planet>(), explorerProjectilePrefab);                    
+                    GetExplorer().ExploreTo(planet.GetComponent<Planet>());                    
                 }
             }
 
@@ -29,7 +29,7 @@ namespace Game.Control
             {
                 if(planet.IsAttackable(id))
                 {
-                    GetFighter().AttackTo(planet.GetComponent<CombatTarget>(), nukeProjectilePrefab.transform);
+                    GetFighter().AttackTo(planet.GetComponent<CombatTarget>());
                     break;
                 }
             }

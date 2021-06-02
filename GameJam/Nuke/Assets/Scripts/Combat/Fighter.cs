@@ -4,8 +4,9 @@ using Game.Global;
 
 namespace Game.Combat
 {    
-    public class Fighter : MonoBehaviour {        
-        public void AttackTo(CombatTarget target, Transform projectilePrefab)
+    public class Fighter : MonoBehaviour {  
+        public Projectile projectilePrefab;
+        public void AttackTo(CombatTarget target)
         {
             if (!IsAttackable(target)) return;
             if (CheckForAvaiableNuke() == false) return;

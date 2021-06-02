@@ -3,13 +3,15 @@ using Game.Control;
 using Game.Global;
 
 namespace Game.Core
-{
+{    
     public class Explorer : MonoBehaviour {
-        public void ExploreTo(Planet target, Projectile projectilePrefab)
+        public Projectile projectilePrefab;
+
+        public void ExploreTo(Planet target)
         {
             if (!IsExplorable(target)) return;            
             if (!CheckForAvaiableExplorer()) return;            
-            ExploreAction(target, projectilePrefab);
+            ExploreAction(target);
         }
 
         private bool CheckTargetInExploring(Planet target)
@@ -17,10 +19,10 @@ namespace Game.Core
             return !GetController().currentExploringPlanets.Contains(target);
         }
 
-        private void ExploreAction(Planet target, Projectile projectilePrefab)
+        private void ExploreAction(Planet target)
         {
             GetController().AddToExploringList(target);
-            FireProjectile(target.transform, projectilePrefab);
+            Utils.FireProjectile(transform, target.transform, projectilePrefab);
         }
         private bool IsExplorable(Planet target)
         {
@@ -37,12 +39,6 @@ namespace Game.Core
         private bool CheckForAvaiableExplorer()
         {
             return Utils.DecreasePlanetExplorerNumber(transform);
-        }
-
-        private void FireProjectile(Transform target, Projectile projectilePrefab)
-        {
-            Projectile projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
-            projectile.Init(this.transform, target.transform);
         }
     }
 }

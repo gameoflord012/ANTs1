@@ -6,9 +6,6 @@ using Game.Combat;
 namespace Game.Control
 {
     public class PlayerController : Controller {
-        [SerializeField] Projectile nukeProjectilePrefab;
-        [SerializeField] Projectile explorerProjectilePrefab;
-
         private void Awake() {
             this.id = Vars.DEFAULT_PLAYER_ID;
         }
@@ -42,8 +39,9 @@ namespace Game.Control
 
         private void DoExplore(Planet target)
         {
-            if(GetExplorer() == null || target == null) return;
-            GetExplorer().ExploreTo(target.GetComponent<Planet>(), explorerProjectilePrefab);
+            Explorer explorer = GetExplorer();
+            if(explorer == null || target == null) return;
+            explorer.ExploreTo(target.GetComponent<Planet>());
         }
 
         private void AttackBehaviour()
@@ -55,7 +53,7 @@ namespace Game.Control
         {
             if(GetFighter() == null || target == null) return;
             Debug.Log("pass1");
-            GetFighter().AttackTo(target.GetComponent<CombatTarget>(), nukeProjectilePrefab.transform);
+            GetFighter().AttackTo(target.GetComponent<CombatTarget>());
         }
 
         private Planet GetMouseTouchPlanet()

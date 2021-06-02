@@ -63,16 +63,29 @@ namespace Game.Global
         public static bool DecreasePlanetExplorerNumber(Transform t)
         {
             Planet planet = t.GetComponent<Planet>();
-            if (planet.numberOfCurrentExplorers == 0) return false;
-            Debug.Log("count");
+            if (planet.numberOfCurrentExplorers == 0) return false;            
             planet.numberOfCurrentExplorers--;
             return true;
         }
 
-        public static void FireProjectile(Transform source, Transform target, Transform projectilePrefab)
+        public static void FireProjectile(Transform source, Transform target, Projectile projectilePrefab)
         {
-            Projectile projectile = Instantiate(projectilePrefab.GetComponent<Projectile>(), source.position, Quaternion.identity);
+            Projectile projectile = Instantiate(projectilePrefab, source.position, Quaternion.identity);
             projectile.Init(source, target);
+        }
+
+        public static void LoadPlanetUpgrade(Planet planet, UpgradeIndex upgrade)
+        {
+            planet.GetComponent<Fighter>().projectilePrefab = upgrade.nukeProjectilePrefab;
+            planet.GetComponent<Explorer>().projectilePrefab = upgrade.explorerProjectilePrefab;
+
+            planet.GetComponent<Health>().maxHealth = upgrade.maxHealth;
+            planet.maxNukeSlot = upgrade.maxNukeSlot;
+            planet.resorceGatherRate = upgrade.resorceGatherRate;
+            planet.nukeRespawnTime = upgrade.nukeRespawnTime;
+            planet.healRate = upgrade.healRate;
+
+            planet.numberOfCurrentExplorers += upgrade.additionExplorer;
         }
     }
 }

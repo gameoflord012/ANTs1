@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6052936113397808064}
   - component: {fileID: 8260916713910905577}
   - component: {fileID: 5120269304109520311}
+  - component: {fileID: 907241614}
   m_Layer: 0
   m_Name: Planet
   m_TagString: Planet
@@ -98,6 +99,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e5ddce325e991642affcd81cf2ff225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 5394523674457466039, guid: da2bf421683ac784b8e21c50b54ef9b7,
+    type: 3}
 --- !u!114 &6052936113397808068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,5 +161,21 @@ MonoBehaviour:
   nukeRespawnTime: 1
   healRate: 5
   owner: {fileID: 0}
-  numberOfCurrentNuke: 3
+  numberOfCurrentNukes: 3
+  numberOfCurrentExplorers: 3
   isVisible: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  currentUpgrade: {fileID: 11400000, guid: 51f8b0fc972d169458a972ec8691c544, type: 2}
+--- !u!114 &907241614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6052936113397808122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c6d0449f56de0145a55402ef0b09a8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 1950056153364436440, guid: 5ca59c5509515784c9fbc4965e998a29,
+    type: 3}

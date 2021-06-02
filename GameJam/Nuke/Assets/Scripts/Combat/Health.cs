@@ -2,8 +2,12 @@ using UnityEngine;
 namespace Game.Combat 
 {
     public class Health : MonoBehaviour {
-        [SerializeField] int maxHealth = 100;
-        [SerializeField] public int health = 100;
+        public int maxHealth = 100;
+        public int health = 100;
+
+        private void Start() {
+            health = maxHealth;
+        }
 
         public void DealDamage(int damage)
         {

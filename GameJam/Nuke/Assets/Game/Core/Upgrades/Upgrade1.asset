@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07743fbcf3116a7429e007c4a7af8f4b, type: 3}
+  m_Name: Upgrade1
+  m_EditorClassIdentifier: 
+  nukeProjectilePrefab: {fileID: 5394523674457466039, guid: da2bf421683ac784b8e21c50b54ef9b7,
+    type: 3}
+  explorerProjectilePrefab: {fileID: 1950056153364436440, guid: 5ca59c5509515784c9fbc4965e998a29,
+    type: 3}
+  maxHealth: 100
+  maxNukeSlot: 3
+  resorceGatherRate: 10
+  nukeRespawnTime: 1
+  healRate: 5
+  additionExplorer: 3

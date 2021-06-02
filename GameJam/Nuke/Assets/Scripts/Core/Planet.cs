@@ -8,10 +8,10 @@ namespace Game.Core
     [RequireComponent(typeof(CombatTarget))]
     [RequireComponent(typeof(Explorer))]
     public class Planet : MonoBehaviour {
-        [SerializeField] int maxNukeSlot = 3;
-        [SerializeField] public int resorceGatherRate = 5;
-        [SerializeField] float nukeRespawnTime = 1f;
-        [SerializeField] int healRate = 5;        
+        public int maxNukeSlot = 3;
+        public int resorceGatherRate = 5;
+        public float nukeRespawnTime = 1f;
+        public int healRate = 5;        
 
         public Controller owner;
         public int numberOfCurrentNukes = 3;
@@ -26,17 +26,35 @@ namespace Game.Core
 
         public bool[] isVisible = new bool[Vars.MAX_CONTROLLER];
 
-        private void Start() 
+        [SerializeField] UpgradeIndex currentUpgrade;
+
+        private void Start()
         {
-            if(owner == null)
-            {                
-                for(int i = 0; i < Vars.MAX_CONTROLLER; i++)
-                    ChangeState(i, new PlanetUnexplored(this, i));                    
+            if (owner == null)
+            {
+                for (int i = 0; i < Vars.MAX_CONTROLLER; i++)
+                    ChangeState(i, new PlanetUnexplored(this, i));
             }
             else
             {
                 ChangeState(owner.id, new PlanetOwned(this, owner));
             }
+
+            LoadUpgrade();
+        }
+
+        private void LoadUpgrade()
+        {
+            if (currentUpgrade != null)
+            {
+                ChangeUpgrade(currentUpgrade);
+            }
+        }
+
+        public void ChangeUpgrade(UpgradeIndex upgrade)
+        {
+            currentUpgrade = upgrade;
+            Utils.LoadPlanetUpgrade(this, currentUpgrade);
         }
 
         public void ChangeState(int id, IPlanetState state)
