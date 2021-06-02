@@ -8,7 +8,6 @@ namespace Game.Combat
         public void AttackTo(CombatTarget target, Transform projectilePrefab)
         {
             if (!IsAttackable(target)) return;
-            Debug.Log("pass2");
             if (CheckForAvaiableNuke() == false) return;
             Utils.FireProjectile(transform, target.transform, projectilePrefab);
             UpdateLastAttacker(target.GetComponent<CombatTarget>());

@@ -14,10 +14,6 @@ namespace Game.Control
             this.id = 1;
         }
 
-        private void Start() {                        
-            
-        }
-
         private void Update() {
             List<Planet> planets = Utils.GetEnemyPlanets(id);
 

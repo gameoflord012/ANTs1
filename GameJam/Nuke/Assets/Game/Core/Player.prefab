@@ -14,8 +14,9 @@ GameObject:
   - component: {fileID: 4797956110112002817}
   - component: {fileID: 4797956110112003069}
   - component: {fileID: 4797956110112003070}
+  - component: {fileID: 519420035}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: Player
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -98,11 +99,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2709f643ee30d2b479b5ca7a625fde14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfExploredShips: 0
   numberOfResources: 0
   currentPoint: 0
   id: 0
   currentSelectedPlanet: {fileID: 0}
+  currentExploringPlanets: []
   nukeProjectilePrefab: {fileID: 5394523674457466039, guid: da2bf421683ac784b8e21c50b54ef9b7,
     type: 3}
   explorerProjectilePrefab: {fileID: 1950056153364436440, guid: 5ca59c5509515784c9fbc4965e998a29,
@@ -119,7 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 343635cbd22031f43812fd9475864c30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Planets:
+  planets:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -134,5 +135,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f43acf16d18d7ff4bbbe592ac2864b3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &519420035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4797956110112002819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad2254d1fa7415c41a0c61b189ccb388, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

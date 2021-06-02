@@ -43,10 +43,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1d2f46c5bfeb3249a0ef5d8ba721b12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfExploredShips: 0
   numberOfResources: 0
   currentPoint: 0
   id: 0
   currentSelectedPlanet: {fileID: 0}
-  projectilePrefab: {fileID: 5394523674457466039, guid: da2bf421683ac784b8e21c50b54ef9b7,
+  currentExploringPlanets: []
+  nukeProjectilePrefab: {fileID: 5394523674457466039, guid: da2bf421683ac784b8e21c50b54ef9b7,
+    type: 3}
+  explorerProjectilePrefab: {fileID: 1950056153364436440, guid: 5ca59c5509515784c9fbc4965e998a29,
     type: 3}
