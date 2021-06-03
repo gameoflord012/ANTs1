@@ -7,6 +7,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1950056153364436440, guid: 5ca59c5509515784c9fbc4965e998a29,
+        type: 3}
+      propertyPath: tiltSpeed
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5709105786036061643, guid: 5ca59c5509515784c9fbc4965e998a29,
         type: 3}
       propertyPath: m_RootOrder
@@ -65,7 +70,7 @@ PrefabInstance:
     - target: {fileID: 5709105786036061655, guid: 5ca59c5509515784c9fbc4965e998a29,
         type: 3}
       propertyPath: m_Name
-      value: ExplorerProjectile
+      value: Exp 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ca59c5509515784c9fbc4965e998a29, type: 3}

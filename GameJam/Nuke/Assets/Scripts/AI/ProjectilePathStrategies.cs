@@ -39,27 +39,43 @@ namespace Game.AI
     {
         Rigidbody2D rb;
         Transform target;
-        float tiltSpeed;
+
+        float accuracy = 2;
+        float tiltSpeed = 7;
+        float rotSpeed = 3f;
+        int curWayPoint;
+ 
+        GameObject rocket;
+
+        [SerializeField] GameObject[] wps;
 
         public KhoiPathStrategy(Rigidbody2D rb, Transform target, float tiltSpeed)
         {
             this.rb = rb;
             this.target = target;
             this.tiltSpeed = tiltSpeed;
+
+            wps = new GameObject[2];
+            wps[0] = rb.gameObject;
+            wps[1] = target.gameObject;
+
+            curWayPoint = 0;
+            rocket = rb.gameObject;
         }
+        
         public void UpdatePath()
         {
-            rb.MovePosition(Vector2.Lerp(GetCurrentPosition(), GetTargetPosition(), tiltSpeed * Time.deltaTime));
-        }
-
-        Vector2 GetTargetPosition()
-        {
-            return new Vector2(target.position.x, target.position.y);
-        }
-
-        Vector2 GetCurrentPosition()
-        {
-            return new Vector2(rb.transform.position.x, rb.transform.position.y);
+            if (rocket != null)
+            {
+                target = wps[curWayPoint].transform;
+                Vector2 direction = target.position - rocket.transform.position;
+                if (direction.magnitude < accuracy && curWayPoint < wps.Length - 1)
+                {
+                    curWayPoint++;
+                }
+                rocket.transform.up = Vector3.Lerp(rocket.transform.up, direction, rotSpeed * Time.deltaTime);
+                rocket.transform.Translate(0, tiltSpeed * Time.deltaTime, 0);
+            }
         }
     }
 }

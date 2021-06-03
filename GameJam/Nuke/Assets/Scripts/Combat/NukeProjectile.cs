@@ -21,6 +21,7 @@ namespace Game.Combat
 
         protected override void Update() {
             base.Update();
+
             Events.Instance.OnNukeLaunching(transform);
         }
 

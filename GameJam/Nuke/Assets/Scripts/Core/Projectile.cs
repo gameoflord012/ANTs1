@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Game.AI;
+using System;
 
 namespace Game.Core
 {
@@ -7,15 +8,18 @@ namespace Game.Core
     public abstract class Projectile : MonoBehaviour {
         [SerializeReference] protected float tiltSpeed = 10f;
         [SerializeReference] public int cost = 10;
+
         protected Rigidbody2D rb;
+        LineRenderer lineRenderer;
 
         protected Transform target;
         protected Transform source;
         
         protected IProjectilePathStrategy pathStrategy;
 
-        private void Awake() {
+        protected virtual void Awake() {
             rb = GetComponent<Rigidbody2D>();
+            lineRenderer = GetComponent<LineRenderer>();
         }
 
         protected virtual void Start() {
@@ -35,6 +39,14 @@ namespace Game.Core
 
         protected virtual void Update() {
             pathStrategy.UpdatePath();
+            DrawLine();
+        }
+
+        private void DrawLine()
+        {
+            lineRenderer.SetPosition(0, transform.position);
+            lineRenderer.SetPosition(1, target.position);
+
         }
 
         private void OnCollisionEnter2D(Collision2D other) {
