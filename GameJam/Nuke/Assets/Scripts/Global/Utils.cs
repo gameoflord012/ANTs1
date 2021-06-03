@@ -84,15 +84,22 @@ namespace Game.Global
         {
             Planet planet = t.GetComponent<Planet>();
             if (planet.numberOfCurrentNukes == 0) return false;
+
             planet.numberOfCurrentNukes--;
+
+            Events.Instance.OnNukeNumberUpdate(t.GetComponent<Planet>(), planet.numberOfCurrentNukes);
+
             return true;
         }
 
         public static bool DecreasePlanetExplorerNumber(Transform t)
         {
             Planet planet = t.GetComponent<Planet>();
-            if (planet.numberOfCurrentExplorers == 0) return false;            
+            if (planet.numberOfCurrentExplorers == 0) return false;    
+
             planet.numberOfCurrentExplorers--;
+
+            Events.Instance.OnExplorerNumberUpdate(t.GetComponent<Planet>(), planet.numberOfCurrentExplorers);
             return true;
         }
 
@@ -183,6 +190,6 @@ namespace Game.Global
         {
             if(list == null || list.Count == 0) return default(T);            
             return list[UnityEngine.Random.Range(0, list.Count)];
-        }        
+        }
     }
 }

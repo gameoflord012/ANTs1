@@ -91,5 +91,17 @@ namespace Game.Global
             Debug.Log("Max Health Update");
             OnPlanetOwnerChangeEvent?.Invoke(planet, controllerId);
         }
+
+        public event Action<Planet, int> OnNukeNumberUpdateEvent;
+        public void OnNukeNumberUpdate(Planet planet, int number)
+        {
+            OnNukeNumberUpdateEvent?.Invoke(planet, number);
+        }
+
+        public event Action<Planet, int> OnExplorerNumberUpdateEvent;
+        public void OnExplorerNumberUpdate(Planet planet, int number)
+        {
+            OnExplorerNumberUpdateEvent?.Invoke(planet, number);
+        }
     }
 }
