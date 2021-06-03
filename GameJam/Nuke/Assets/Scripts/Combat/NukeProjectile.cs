@@ -7,8 +7,7 @@ namespace Game.Combat
 {
     public class NukeProjectile : Projectile
     {        
-        [SerializeField] int damage = 10;
-        [SerializeField] int cost = 10;
+        [SerializeField] int damage = 10;        
 
         protected override void Start() {
             base.Start();            

@@ -15,7 +15,7 @@ namespace Game.Core
 
         public Controller owner;
         public int numberOfCurrentNukes = 3;
-        public int numberOfCurrentExplorers = 3;
+        public int numberOfCurrentExplorers = 0;
 
         float timeSinceLastGainResources = Mathf.Infinity;        
         float timeSinceLastGainNuke = Mathf.Infinity;
@@ -47,14 +47,8 @@ namespace Game.Core
         {
             if (currentUpgrade != null)
             {
-                ChangeUpgrade(currentUpgrade);
+                Utils.LoadPlanetUpgrade(this, currentUpgrade);
             }
-        }
-
-        public void ChangeUpgrade(UpgradeIndex upgrade)
-        {
-            currentUpgrade = upgrade;
-            Utils.LoadPlanetUpgrade(this, currentUpgrade);
         }
 
         public void ChangeState(int id, IPlanetState state)

@@ -85,9 +85,11 @@ namespace Game.Global
             return true;
         }
 
-        public static void LoadPlanetUpgrade(Planet planet, UpgradeIndex upgrade)
+        public static bool LoadPlanetUpgrade(Planet planet, UpgradeIndex upgrade)
         {
-            if(GetController(planet).DecreaseResources(upgrade.cost))
+            if(!GetController(planet).DecreaseResources(upgrade.cost)) return false;            
+
+            planet.currentUpgrade = upgrade;
 
             planet.GetComponent<Fighter>().projectilePrefab = upgrade.nukeProjectilePrefab;
             planet.GetComponent<Explorer>().projectilePrefab = upgrade.explorerProjectilePrefab;
@@ -99,19 +101,23 @@ namespace Game.Global
             planet.healRate = upgrade.healRate;
 
             planet.numberOfCurrentExplorers += upgrade.additionExplorer;
+
+            return true;
         }
 
         public static void LoadPlanetNextUpdate(Planet planet)
-        {
-            Events.Instance.OnPlanetUpgrade(planet.transform);            
-            LoadPlanetUpgrade(planet, Vars.Instance.upgrades[GetNextUpgradeId(planet)]);
+        {                        
+            if(LoadPlanetUpgrade(planet, Vars.Instance.upgrades[GetNextUpgradeId(planet)]))
+            {
+                Events.Instance.OnPlanetUpgrade(planet.transform);
+            }
         }
 
         private static int GetNextUpgradeId(Planet planet)
         {
             int upgradeId = Array.IndexOf(Vars.Instance.upgrades, planet.currentUpgrade);
 
-            Debug.LogException(new Exception("Upgrade not found"));
+            if(upgradeId == -1) Debug.LogException(new Exception("Upgrade not found"));
 
             int nextUpgradeId = Mathf.Min(Vars.Instance.upgrades.Length - 1, upgradeId + 1);
             return nextUpgradeId;

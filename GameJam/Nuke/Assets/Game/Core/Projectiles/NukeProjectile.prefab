@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 4435339458968753293}
   - component: {fileID: 2290984219602035925}
   - component: {fileID: -2197064452024069453}
-  - component: {fileID: 5394523674457466039}
+  - component: {fileID: 842993015400886469}
   m_Layer: 0
-  m_Name: Projectile
+  m_Name: NukeProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -133,7 +133,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &5394523674457466039
+--- !u!114 &842993015400886469
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -142,8 +142,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4435339458968753295}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f05aaa15fc515e4ca9bd36ab9988c59, type: 3}
+  m_Script: {fileID: 11500000, guid: 0d767a2b67d95bc4dbff6f76abf490e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   tiltSpeed: 10
+  cost: 10
   damage: 10
