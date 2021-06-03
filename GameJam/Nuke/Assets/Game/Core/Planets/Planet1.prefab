@@ -88,6 +88,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Planet1
       objectReference: {fileID: 0}
+    - target: {fileID: 7043567670157510663, guid: 2e7bf5e7a84f3f142b291da539ddddac,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e51c77405e9763a4894422d7e0e6adf0,
+        type: 3}
     - target: {fileID: 8616507298843817635, guid: 2e7bf5e7a84f3f142b291da539ddddac,
         type: 3}
       propertyPath: m_EffectDistance.x

@@ -108,5 +108,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Planet5
       objectReference: {fileID: 0}
+    - target: {fileID: 7043567670157510663, guid: 2e7bf5e7a84f3f142b291da539ddddac,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4df5d1570ae58b641b0e56e9dd52e06f,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e7bf5e7a84f3f142b291da539ddddac, type: 3}
