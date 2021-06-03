@@ -58,16 +58,16 @@ namespace Game.Global
             OnNotSufficeResourcesEvent?.Invoke(transform);
         }
 
-        public event Action<Planet> OnChangeSelectedPlanetEvent;
+        public event Action<Planet> OnSelectedPlanetEvent;
         public void OnSelectedPlanet(Planet planet)
         {
-            OnChangeSelectedPlanetEvent?.Invoke(planet);
+            OnSelectedPlanetEvent?.Invoke(planet);
         }
 
-        public event Action<Planet> OnChangeDeselectedPlanetEvent;
+        public event Action<Planet> OnDeselectedPlanetEvent;
         public void OnDeselectedPlanet(Planet planet)
         {
-            OnChangeDeselectedPlanetEvent?.Invoke(planet);
+            OnDeselectedPlanetEvent?.Invoke(planet);
         }
     }
 }
