@@ -19,7 +19,7 @@ MonoBehaviour:
   maxHealth: 100
   maxNukeSlot: 3
   resorceGatherRate: 10
-  nukeRespawnTime: 1
+  nukeRespawnTime: 5
   healRate: 5
   additionExplorer: 3
   cost: 0

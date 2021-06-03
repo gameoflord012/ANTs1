@@ -12,12 +12,7 @@ namespace Game.Control
         }
 
         private void Start() {
-        }        
-
-        public void DebugBehaviour(Planet planet)
-        {
-            Debug.Log(planet.currentStates[1].GetType().FullName);
-        }
+        }                
 
         public void SelectBehaviour(Planet planet)
         {

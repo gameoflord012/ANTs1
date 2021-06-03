@@ -43,3 +43,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Planets
+    uniqueID: 284943603
+    locked: 0
+  - name: Projectiles
+    uniqueID: 1810893313
+    locked: 0
+  - name: BackGround
+    uniqueID: 3502813783
+    locked: 0
+  - name: UI
+    uniqueID: 3176136353
+    locked: 0
