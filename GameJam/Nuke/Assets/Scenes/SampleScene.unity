@@ -139,6 +139,49 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1923346014}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &513720383
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 513720384}
+  - component: {fileID: 513720385}
+  m_Layer: 0
+  m_Name: PlanetManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &513720384
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 513720383}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1270826532}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &513720385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 513720383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7449e990a0fef4548972d50fc1a02487, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &519420030 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4797956110112002817, guid: 77a3f519c0fa22840b71dcdaf2a9d4a1,
@@ -403,6 +446,38 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf14308b5706ac04cb1652d986c983a0, type: 3}
+--- !u!1 &1270826531
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1270826532}
+  m_Layer: 0
+  m_Name: Manger-----------------------
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1270826532
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1270826531}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.7567387, y: 2.318686, z: -0.23482655}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1857060641}
+  - {fileID: 513720384}
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1405628435
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -702,6 +777,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1d2f46c5bfeb3249a0ef5d8ba721b12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1857060640
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1857060641}
+  - component: {fileID: 1857060642}
+  m_Layer: 0
+  m_Name: HealthBarManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1857060641
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1857060640}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1270826532}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1857060642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1857060640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 439bfc43a4a6a454993322c7033718ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1861222297 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7092945285184917301, guid: 6d9c327300c790548b080385bcbd0d0a,
@@ -755,12 +873,12 @@ PrefabInstance:
     - target: {fileID: 1601766419156220050, guid: 3cc8590b4364bc845be80055a43f60d8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.64
+      value: -0.08
       objectReference: {fileID: 0}
     - target: {fileID: 1601766419156220050, guid: 3cc8590b4364bc845be80055a43f60d8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.1
+      value: -3.29
       objectReference: {fileID: 0}
     - target: {fileID: 1601766419156220050, guid: 3cc8590b4364bc845be80055a43f60d8,
         type: 3}
@@ -856,6 +974,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Main Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 4797956110112003069, guid: 77a3f519c0fa22840b71dcdaf2a9d4a1,
+        type: 3}
+      propertyPath: red.rgba
+      value: 4281019357
+      objectReference: {fileID: 0}
+    - target: {fileID: 4797956110112003069, guid: 77a3f519c0fa22840b71dcdaf2a9d4a1,
+        type: 3}
+      propertyPath: green.rgba
+      value: 4282708850
       objectReference: {fileID: 0}
     - target: {fileID: 4797956110112003069, guid: 77a3f519c0fa22840b71dcdaf2a9d4a1,
         type: 3}

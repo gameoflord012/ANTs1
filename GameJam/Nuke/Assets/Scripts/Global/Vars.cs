@@ -13,5 +13,8 @@ namespace Game.Global
         public Planet[] planets;
 
         public UpgradeIndex[] upgrades;
+
+        public Color32 green;
+        public Color32 red;
     }
 }

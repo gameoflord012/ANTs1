@@ -31,15 +31,25 @@ namespace Game.Core
 
         public UpgradeIndex currentUpgrade;
 
+        // model
+        public Transform Model;
+
         private void Awake() {
             animator = GetComponent<Animator>();
         }
 
         private void Start()
         {
+            InitCollider();
+
             LoadState();
 
             LoadUpgrade();
+        }
+
+        void InitCollider()
+        {
+            GetComponentInChildren<BoxCollider2D>().size = Model.transform.localScale;
         }
 
         private void LoadState()

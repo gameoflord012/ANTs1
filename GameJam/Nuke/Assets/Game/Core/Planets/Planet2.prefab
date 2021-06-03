@@ -53,6 +53,26 @@ PrefabInstance:
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 1.3333334
       objectReference: {fileID: 0}
+    - target: {fileID: 3587200138033525220, guid: 2e7bf5e7a84f3f142b291da539ddddac,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4610833252605067624, guid: 2e7bf5e7a84f3f142b291da539ddddac,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4610833252605067624, guid: 2e7bf5e7a84f3f142b291da539ddddac,
+        type: 3}
+      propertyPath: m_DrawMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4610833252605067624, guid: 2e7bf5e7a84f3f142b291da539ddddac,
+        type: 3}
+      propertyPath: m_SpriteTileMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6052936113397808070, guid: 2e7bf5e7a84f3f142b291da539ddddac,
         type: 3}
       propertyPath: m_Sprite

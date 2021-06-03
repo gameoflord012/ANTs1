@@ -20,7 +20,7 @@ namespace Game.Global
 
         void OnSelectedPlanet(Planet planet)
         {
-            Vector3 size = new Vector3(planet.transform.localScale.x, planet.transform.localScale.y, 1);
+            Vector3 size = new Vector3(planet.Model.transform.localScale.x, planet.Model.transform.localScale.y, 1);
 
             currentOutline = Instantiate(outlinePlanet, planet.transform.position, Quaternion.identity);
             currentOutline.transform.localScale = size;

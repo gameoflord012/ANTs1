@@ -76,8 +76,8 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1.25, y: 0.5}
+  m_DrawMode: 1
+  m_Size: {x: 1, y: 0.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -97,12 +97,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   planetModel: {fileID: 1084978386126004486}
   healthBar: {fileID: 3967025670980295689}
-  green:
-    serializedVersion: 2
-    rgba: 1107767
-  red:
-    serializedVersion: 2
-    rgba: 1710813
 --- !u!1 &1736806571777524487
 GameObject:
   m_ObjectHideFlags: 0
@@ -128,7 +122,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1736806571777524487}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.625, y: 0, z: 0}
+  m_LocalPosition: {x: -0.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3587200138033525220}
@@ -178,7 +172,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 1.25, y: 0.5}
+  m_Size: {x: 1, y: 0.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -196,7 +190,7 @@ GameObject:
   - component: {fileID: 7043567670157510663}
   m_Layer: 0
   m_Name: Model
-  m_TagString: Untagged
+  m_TagString: Planet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -279,8 +273,8 @@ GameObject:
   - component: {fileID: 8260916713910905577}
   - component: {fileID: 5120269304109520311}
   - component: {fileID: 907241614}
-  - component: {fileID: 1375773073718771267}
   - component: {fileID: 6580609824909812245}
+  - component: {fileID: 787297687267467377}
   m_Layer: 0
   m_Name: Planet
   m_TagString: Planet
@@ -365,6 +359,7 @@ MonoBehaviour:
   numberOfCurrentExplorers: 3
   isVisible: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   currentUpgrade: {fileID: 11400000, guid: 51f8b0fc972d169458a972ec8691c544, type: 2}
+  Model: {fileID: 1084978386126004486}
 --- !u!114 &907241614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -379,7 +374,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 1950056153364436440, guid: 5ca59c5509515784c9fbc4965e998a29,
     type: 3}
---- !u!61 &1375773073718771267
+--- !u!95 &6580609824909812245
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6052936113397808122}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e97e9e3a2efe9ca4da4a1fe225a47875, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!61 &787297687267467377
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -405,22 +419,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!95 &6580609824909812245
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6052936113397808122}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e97e9e3a2efe9ca4da4a1fe225a47875, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
