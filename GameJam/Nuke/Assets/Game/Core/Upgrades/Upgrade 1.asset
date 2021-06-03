@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 07743fbcf3116a7429e007c4a7af8f4b, type: 3}
-  m_Name: Upgrade1
+  m_Name: Upgrade 1
   m_EditorClassIdentifier: 
-  nukeProjectilePrefab: {fileID: 5394523674457466039, guid: da2bf421683ac784b8e21c50b54ef9b7,
+  nukeProjectilePrefab: {fileID: 2270775901363653711, guid: fef5761592bb01045a85b93df591dfe3,
     type: 3}
-  explorerProjectilePrefab: {fileID: 1950056153364436440, guid: 5ca59c5509515784c9fbc4965e998a29,
+  explorerProjectilePrefab: {fileID: 6379752766861932854, guid: d7564f4a20da45a46a11c9e2b47355ca,
     type: 3}
   maxHealth: 100
   maxNukeSlot: 3
@@ -22,3 +22,4 @@ MonoBehaviour:
   nukeRespawnTime: 1
   healRate: 5
   additionExplorer: 3
+  cost: 0

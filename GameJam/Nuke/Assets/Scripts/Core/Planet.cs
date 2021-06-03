@@ -2,12 +2,15 @@ using UnityEngine;
 using Game.Combat;
 using Game.Control;
 using Game.Global;
+using System;
 
 namespace Game.Core
 {
     [RequireComponent(typeof(CombatTarget))]
     [RequireComponent(typeof(Explorer))]
     public class Planet : MonoBehaviour {
+        Animator animator;
+
         public int maxNukeSlot = 3;
         public int resorceGatherRate = 5;
         public float nukeRespawnTime = 1f;
@@ -28,7 +31,18 @@ namespace Game.Core
 
         public UpgradeIndex currentUpgrade;
 
+        private void Awake() {
+            animator = GetComponent<Animator>();
+        }
+
         private void Start()
+        {
+            LoadState();
+
+            LoadUpgrade();
+        }
+
+        private void LoadState()
         {
             if (owner == null)
             {
@@ -37,10 +51,9 @@ namespace Game.Core
             }
             else
             {
+                ChangeState(owner.id, new PlanetExplored(this, owner));
                 ChangeState(owner.id, new PlanetOwned(this, owner));
             }
-
-            LoadUpgrade();
         }
 
         private void LoadUpgrade()
@@ -73,6 +86,38 @@ namespace Game.Core
             return currentStates[id].GetType() == typeof(PlanetOccupied);
         }
 
+        public bool IsNukeReady()
+        {
+            if(!Utils.GetController(this).IsSufficeResources(GetProjectileCost())) return false;
+            if(numberOfCurrentNukes == 0) return false;
+            return true;
+        }
+
+        public bool IsExplorerReady()
+        {
+            return numberOfCurrentExplorers > 0;
+        }
+
+        private int GetProjectileCost()
+        {
+            return transform.GetComponent<Fighter>().projectilePrefab.cost;
+        }
+
+        public bool IsOwned(int id)
+        {
+            return currentStates[id].GetType() == typeof(PlanetOwned);
+        }
+
+        public bool IsOccupied(int id)
+        {
+            return currentStates[id].GetType() == typeof(PlanetOccupied);
+        }
+
+        public bool IsUnexplored(int id)
+        {
+            return currentStates[id].GetType() == typeof(PlanetUnexplored);
+        }
+
         private void Update() {
             if(owner != null)
             {
@@ -88,6 +133,12 @@ namespace Game.Core
             HealPlanet();
 
             UpdateTimer();
+            UpdateAnimator();
+        }
+
+        private void UpdateAnimator()
+        {
+            animator.SetBool("PlanetExplored", isVisible[Vars.DEFAULT_PLAYER_ID]);
         }
 
         private void HealPlanet()
@@ -127,7 +178,7 @@ namespace Game.Core
                 owner.currentResources += resorceGatherRate;
                 timeSinceLastGainResources = 0f;
             }
-        }
+        }        
     }    
 
     public interface IPlanetState

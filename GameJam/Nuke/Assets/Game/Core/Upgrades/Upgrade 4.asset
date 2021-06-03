@@ -10,14 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 07743fbcf3116a7429e007c4a7af8f4b, type: 3}
-  m_Name: Upgrade4
+  m_Name: Upgrade 4
   m_EditorClassIdentifier: 
-  nukeProjectilePrefab: {fileID: 0}
-  explorerProjectilePrefab: {fileID: 0}
-  maxHealth: 0
-  maxNukeSlot: 0
-  resorceGatherRate: 0
-  nukeRespawnTime: 0
-  healRate: 0
-  additionExplorer: 0
-  cost: 0
+  nukeProjectilePrefab: {fileID: 1635084976666435639, guid: 035b6e2e353c37f4486a0467da89845b,
+    type: 3}
+  explorerProjectilePrefab: {fileID: 5048838538434953332, guid: 44c39e3a86e98ed48b2e655cea26628b,
+    type: 3}
+  maxHealth: 1000
+  maxNukeSlot: 3
+  resorceGatherRate: 10
+  nukeRespawnTime: 1
+  healRate: 5
+  additionExplorer: 3
+  cost: 10

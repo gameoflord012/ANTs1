@@ -15,6 +15,9 @@ GameObject:
   - component: {fileID: 4797956110112003069}
   - component: {fileID: 4797956110112003070}
   - component: {fileID: 519420035}
+  - component: {fileID: 1880498184}
+  - component: {fileID: 1880498185}
+  - component: {fileID: 3859836282449361024}
   m_Layer: 0
   m_Name: Player
   m_TagString: MainCamera
@@ -99,15 +102,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2709f643ee30d2b479b5ca7a625fde14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfResources: 0
+  currentResources: 100
   currentPoint: 0
   id: 0
   currentSelectedPlanet: {fileID: 0}
+  autoSelectedPlanet: {fileID: 0}
   currentExploringPlanets: []
-  nukeProjectilePrefab: {fileID: 5394523674457466039, guid: da2bf421683ac784b8e21c50b54ef9b7,
-    type: 3}
-  explorerProjectilePrefab: {fileID: 1950056153364436440, guid: 5ca59c5509515784c9fbc4965e998a29,
-    type: 3}
 --- !u!114 &4797956110112003069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,6 +125,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  upgrades:
+  - {fileID: 11400000, guid: 51f8b0fc972d169458a972ec8691c544, type: 2}
+  - {fileID: 11400000, guid: 0b4b9d32656b6604b9eff94109274c2f, type: 2}
+  - {fileID: 11400000, guid: ea879fa2a8e3c2c40b23e3411365866b, type: 2}
+  - {fileID: 11400000, guid: e2455c56df38a4f479600605b924e4e7, type: 2}
 --- !u!114 &4797956110112003070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,5 +153,43 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ad2254d1fa7415c41a0c61b189ccb388, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1880498184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4797956110112002819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2311f7796ac99b140988fe3239566377, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TIME_BETWEEN_DOUBLE_CLICKS: 0.2
+  DOUBLE_CLICKS_RADIUS: 0.1
+--- !u!114 &1880498185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4797956110112002819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 757fe322124b0054495ff629744c7bb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3859836282449361024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4797956110112002819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06d93d62c38e01143a1b3aaff56705b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

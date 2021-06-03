@@ -19,7 +19,6 @@ namespace Game.Core
         }
 
         protected virtual void Start() {
-            Debug.Log("Strategy Loaded");
             LoadStrategy();
         }
 

@@ -10,13 +10,35 @@ namespace Game.Global
     public class Utils : Singleton<Utils> {
         protected Utils() { }
         
-        public static List<Planet> GetEnemyPlanets(int controllerId)
+        public static List<Planet> GetOccupiedPlanets(int controllerId)
+        {
+            List<Planet> planets = new List<Planet>();
+            foreach(Planet p in Vars.Instance.planets)
+            {                
+                if(p.owner == null) continue; // Error here mean not set planets in Vars
+                if(p.IsOccupied(controllerId))
+                    planets.Add(p);
+            }
+            return planets;
+        }
+
+        public static List<Planet> GetOwnedPlanets(int controllerId)
         {
             List<Planet> planets = new List<Planet>();
             foreach(Planet p in Vars.Instance.planets)
             {
-                if(p.owner == null) continue;
-                if(p.owner.id != controllerId)
+                if(p.IsOwned(controllerId))
+                    planets.Add(p);
+            }
+            return planets;
+        }
+
+        public static List<Planet> GetUnexploredPlanets(int controllerId)
+        {
+            List<Planet> planets = new List<Planet>();
+            foreach(Planet p in Vars.Instance.planets)
+            {
+                if(p.IsUnexplored(controllerId))
                     planets.Add(p);
             }
             return planets;
@@ -86,8 +108,8 @@ namespace Game.Global
         }
 
         public static bool LoadPlanetUpgrade(Planet planet, UpgradeIndex upgrade)
-        {
-            if(!GetController(planet).DecreaseResources(upgrade.cost)) return false;            
+        {            
+            if(GetController(planet) != null && !GetController(planet).DecreaseResources(upgrade.cost)) return false;
 
             planet.currentUpgrade = upgrade;
 
@@ -106,8 +128,11 @@ namespace Game.Global
         }
 
         public static void LoadPlanetNextUpdate(Planet planet)
-        {                        
-            if(LoadPlanetUpgrade(planet, Vars.Instance.upgrades[GetNextUpgradeId(planet)]))
+        {                    
+            int id = GetNextUpgradeId(planet);
+            if(id == -1) return;
+
+            if(LoadPlanetUpgrade(planet, Vars.Instance.upgrades[id]))
             {
                 Events.Instance.OnPlanetUpgrade(planet.transform);
             }
@@ -119,8 +144,44 @@ namespace Game.Global
 
             if(upgradeId == -1) Debug.LogException(new Exception("Upgrade not found"));
 
-            int nextUpgradeId = Mathf.Min(Vars.Instance.upgrades.Length - 1, upgradeId + 1);
-            return nextUpgradeId;
+            int nextUpgradeId = upgradeId + 1;
+            return (nextUpgradeId == Vars.Instance.upgrades.Length) ? -1 : nextUpgradeId;
         }
+
+        public static List<Planet> GetNukeShooters(int controllerId)
+        {
+            List<Planet> planets = new List<Planet>();
+            foreach(Planet planet in GetOwnedPlanets(controllerId))
+            {                
+                if(planet.IsNukeReady())
+                    planets.Add(planet);
+            }
+            return planets;
+        }
+
+        public static List<Planet> GetExplorerShooters(int controllerId)
+        {
+            List<Planet> planets = new List<Planet>();
+            foreach(Planet planet in GetOwnedPlanets(controllerId))
+            {                
+                if(planet.IsExplorerReady())
+                    planets.Add(planet);
+            }
+            return planets;
+        }
+
+        public static bool IsUpgradeLevelGreater(MonoBehaviour left, MonoBehaviour right)
+        {
+            Planet p1 = left.GetComponent<Planet>();
+            Planet p2 = right.GetComponent<Planet>();
+            UpgradeIndex[] upgrades = Vars.Instance.upgrades;
+            return Array.IndexOf(upgrades, p1.currentUpgrade) > Array.IndexOf(upgrades, p2.currentUpgrade);
+        }
+
+        public static T GetRandomElement<T> (List<T> list)
+        {
+            if(list == null || list.Count == 0) return default(T);            
+            return list[UnityEngine.Random.Range(0, list.Count)];
+        }        
     }
 }
