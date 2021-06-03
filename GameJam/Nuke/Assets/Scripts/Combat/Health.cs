@@ -1,4 +1,6 @@
 using UnityEngine;
+using Game.Global;
+
 namespace Game.Combat 
 {
     public class Health : MonoBehaviour {
@@ -11,13 +13,19 @@ namespace Game.Combat
 
         public void DealDamage(int damage)
         {
-            if(IsDead()) return;
-            health = Mathf.Max(0, health - damage);
+            if(IsDead()) return;            
+            SetHealth(-damage);
         }
 
         public void GainHealth(int health)
         {
-            this.health = Mathf.Min(maxHealth, this.health + health);
+            SetHealth(health);
+        }
+
+        private void SetHealth(int health)
+        {
+            this.health = Mathf.Clamp(this.health + health, 0, maxHealth);
+            Events.Instance.OnHealthUpdate(this);
         }
 
         public bool IsDead()

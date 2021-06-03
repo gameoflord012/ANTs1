@@ -146,7 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d767a2b67d95bc4dbff6f76abf490e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tiltSpeed: 0.2
+  tiltSpeed: 10
   cost: 10
   damage: 10
 --- !u!120 &7590950736069926361
