@@ -178,7 +178,12 @@ namespace Game.Core
                 owner.currentResources += resorceGatherRate;
                 timeSinceLastGainResources = 0f;
             }
-        }        
+        }
+
+        internal void SetOwner(Controller controller)
+        {
+            Events.Instance.OnPlanetOwnerChange(this, controller.id);
+        }
     }    
 
     public interface IPlanetState
@@ -265,8 +270,8 @@ namespace Game.Core
         }
 
         public void OnStateEnter()
-        {
-            planet.owner = controller;
+        {            
+            planet.SetOwner(controller);
 
             for (int i = 0; i < Vars.MAX_CONTROLLER; i++)
             {
