@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System;
 using Game.Core;
+using Game.Combat;
 
 namespace Game.Global
 {
@@ -68,6 +69,13 @@ namespace Game.Global
         public void OnDeselectedPlanet(Planet planet)
         {
             OnDeselectedPlanetEvent?.Invoke(planet);
+        }
+
+        public event Action<Health> OnHealthUpdateEvent;
+        public void OnHealthUpdate(Health health)
+        {
+            Debug.Log("Health Update");
+            OnHealthUpdateEvent?.Invoke(health);
         }
     }
 }
