@@ -11,5 +11,7 @@ namespace Game.Global
         public const int DEFAULT_PLAYER_ID = 0;
 
         public Planet[] planets;
+
+        public UpgradeIndex[] upgrades;
     }
 }

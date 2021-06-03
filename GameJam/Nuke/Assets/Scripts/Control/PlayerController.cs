@@ -2,6 +2,7 @@
 using Game.Core;
 using Game.Global;
 using Game.Combat;
+using System;
 
 namespace Game.Control
 {
@@ -25,6 +26,15 @@ namespace Game.Control
             {
                 DebugBehaviour();
             }
+            if(Input.GetKeyDown(KeyCode.X))
+            {
+                UpgradeBehaviour();
+            }
+        }
+
+        private void UpgradeBehaviour()
+        {
+            Utils.LoadPlanetNextUpdate(GetMouseTouchPlanet());
         }
 
         private void DebugBehaviour()

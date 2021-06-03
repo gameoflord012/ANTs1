@@ -25,5 +25,17 @@ namespace Game.Global
             Debug.Log("Collides");
             OnNukeCollideEvent?.Invoke(transform);
         }
+
+        public event Action<Transform> OnPlanetUpgradeEvent;
+        public void OnPlanetUpgrade(Transform transform)
+        {
+            OnPlanetUpgradeEvent?.Invoke(transform);
+        }
+
+        public event Action<Transform> OnNotSufficeResourcesEvent;
+        public void OnNotSufficeResources(Transform transform)
+        {
+            OnNotSufficeResourcesEvent?.Invoke(transform);
+        }
     }
 }

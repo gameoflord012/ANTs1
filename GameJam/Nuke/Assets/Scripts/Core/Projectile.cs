@@ -5,7 +5,8 @@ namespace Game.Core
 {
     [RequireComponent(typeof(Rigidbody2D))]
     public abstract class Projectile : MonoBehaviour {
-        [SerializeField] protected float tiltSpeed = 10f;
+        [SerializeReference] protected float tiltSpeed = 10f;
+        [SerializeReference] public int cost = 10;
         protected Rigidbody2D rb;
 
         protected Transform target;

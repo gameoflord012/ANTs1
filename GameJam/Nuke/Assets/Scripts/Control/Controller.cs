@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace Game.Control
 {
     public class Controller : MonoBehaviour {
-        [SerializeReference] public int numberOfResources;
+        [SerializeReference] public int currentResources;
         [SerializeReference] public int currentPoint;
         [SerializeReference] public int id;
         [SerializeReference] public Planet currentSelectedPlanet;
@@ -34,6 +34,13 @@ namespace Game.Control
         public void RemoveFromExploringList(Planet target)
         {
             currentExploringPlanets.Remove(target);
+        }
+
+        public bool DecreaseResources(int amount)
+        {
+            if(currentResources < amount) return false;
+            currentResources -= amount;
+            return true;
         }
     }
 }

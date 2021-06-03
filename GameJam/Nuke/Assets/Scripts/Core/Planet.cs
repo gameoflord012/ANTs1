@@ -26,7 +26,7 @@ namespace Game.Core
 
         public bool[] isVisible = new bool[Vars.MAX_CONTROLLER];
 
-        [SerializeField] UpgradeIndex currentUpgrade;
+        public UpgradeIndex currentUpgrade;
 
         private void Start()
         {
@@ -130,7 +130,7 @@ namespace Game.Core
         {
             if(timeSinceLastGainResources > 1.0f)
             {
-                owner.numberOfResources += resorceGatherRate;
+                owner.currentResources += resorceGatherRate;
                 timeSinceLastGainResources = 0f;
             }
         }

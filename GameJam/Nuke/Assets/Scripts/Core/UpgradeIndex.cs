@@ -5,7 +5,7 @@ namespace Game.Core
     [CreateAssetMenu(fileName = "Upgrade", menuName = "ScriptableObjects/UpgradeIndex")]    
     public class UpgradeIndex : ScriptableObject {
         public Projectile nukeProjectilePrefab;
-        public Projectile explorerProjectilePrefab; 
+        public Projectile explorerProjectilePrefab;
 
         public int maxHealth;
         public int maxNukeSlot;
@@ -14,5 +14,6 @@ namespace Game.Core
         public int healRate;
 
         public int additionExplorer;
+        public int cost;
     }
 }
