@@ -116,7 +116,8 @@ namespace Game.Global
             planet.GetComponent<Fighter>().projectilePrefab = upgrade.nukeProjectilePrefab;
             planet.GetComponent<Explorer>().projectilePrefab = upgrade.explorerProjectilePrefab;
 
-            planet.GetComponent<Health>().maxHealth = upgrade.maxHealth;
+            planet.GetComponent<Health>().SetMaxHealth(upgrade.maxHealth);
+
             planet.maxNukeSlot = upgrade.maxNukeSlot;
             planet.resorceGatherRate = upgrade.resorceGatherRate;
             planet.nukeRespawnTime = upgrade.nukeRespawnTime;

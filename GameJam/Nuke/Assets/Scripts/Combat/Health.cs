@@ -28,6 +28,12 @@ namespace Game.Combat
             Events.Instance.OnHealthUpdate(this);
         }
 
+        public void SetMaxHealth(int health)
+        {
+            maxHealth = health;
+            Events.Instance.OnMaxHealthUpdate(this);
+        }
+
         public bool IsDead()
         {
             return health == 0;

@@ -77,5 +77,12 @@ namespace Game.Global
             Debug.Log("Health Update");
             OnHealthUpdateEvent?.Invoke(health);
         }
+
+        public event Action<Health> OnMaxHealthUpdateEvent;
+        public void OnMaxHealthUpdate(Health health)
+        {
+            Debug.Log("Max Health Update");
+            OnMaxHealthUpdateEvent?.Invoke(health);
+        }
     }
 }
