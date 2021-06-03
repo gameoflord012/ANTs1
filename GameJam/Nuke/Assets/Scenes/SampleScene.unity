@@ -796,6 +796,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1401818841684503085, guid: 77a3f519c0fa22840b71dcdaf2a9d4a1,
+        type: 3}
+      propertyPath: outlinePlanet
+      value: 
+      objectReference: {fileID: 9053781548591936753, guid: ab5ba6248a4ebb442b2a4848c8f6929f,
+        type: 3}
     - target: {fileID: 3859836282449361024, guid: 77a3f519c0fa22840b71dcdaf2a9d4a1,
         type: 3}
       propertyPath: zoomSpeed
