@@ -7,10 +7,10 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MidPlanet
-  m_Shader: {fileID: -6465566751694194690, guid: a126036f2eac5c2418998a211b4c215a,
+  m_Name: Flash2
+  m_Shader: {fileID: -6465566751694194690, guid: fbe26168f3f83fb479f7958cd01ecc69,
     type: 3}
-  m_ShaderKeywords: ETC1_EXTERNAL_ALPHA
+  m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -20,10 +20,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - Texture2D_5CF27925:
-        m_Texture: {fileID: 2800000, guid: 51c05171f5c63f0479b155e58763628d, type: 3}
+    - Texture2D_C0D32BC3:
+        m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats: []
     m_Colors:
-    - Color_2BD2D3C4: {r: 2, g: 2, b: 2, a: 0.73333335}
+    - Color_EB29E34B: {r: 0.23053783, g: 0.23053783, b: 0.23053783, a: 0.50980395}
