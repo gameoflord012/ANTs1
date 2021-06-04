@@ -31,7 +31,7 @@ namespace Game.Global
 
         private UpgradeBar GetUpgradeBar(Transform t)
         {
-            return t.Find("UpgradeBar").GetComponent<UpgradeBar>();
+            return t.Find("Indexes/UpgradeBar").GetComponent<UpgradeBar>();
         }
     }
 }

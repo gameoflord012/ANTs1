@@ -116,9 +116,10 @@ namespace Game.Global
         }
 
         public static bool LoadPlanetUpgrade(Planet planet, UpgradeIndex upgrade)
-        {            
+        {
             if(GetController(planet) != null && !GetController(planet).DecreaseResources(upgrade.cost)) return false;
-            
+
+            Events.Instance.OnPlanetLoadUpgrade(planet, Instance.GetLevelId(upgrade));
             planet.currentUpgrade = upgrade;
 
             planet.GetComponent<Fighter>().projectilePrefab = upgrade.nukeProjectilePrefab;
@@ -158,6 +159,11 @@ namespace Game.Global
 
             if(nextUpgrade == null) return;
             StartCoroutine(UpgradeCoroutine(planet, nextUpgrade));
+        }
+
+        int GetLevelId(UpgradeIndex upgrade)
+        {
+            return Array.IndexOf(Vars.Instance.upgrades, upgrade);
         }
 
         private UpgradeIndex GetNextUpgrade(Planet planet)

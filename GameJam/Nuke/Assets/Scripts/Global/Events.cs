@@ -38,10 +38,16 @@ namespace Game.Global
         }
 
         public event Action<Planet> OnPlanetFinishedUpgradeEvent;
-        public void OnPlanetFinishedUpgrade(Planet transform)
+        public void OnPlanetFinishedUpgrade(Planet planet)
         {
             Debug.Log("Planet finished upgrade");
-            OnPlanetFinishedUpgradeEvent?.Invoke(transform);
+            OnPlanetFinishedUpgradeEvent?.Invoke(planet);
+        }
+
+        public event Action<Planet, int> OnPlanetLoadUpgradeEvent;
+        public void OnPlanetLoadUpgrade(Planet planet, int level)
+        {            
+            OnPlanetLoadUpgradeEvent?.Invoke(planet, level);
         }
 
         

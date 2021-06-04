@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿ using UnityEngine;
 using Game.Combat;
 using Game.UI;
 using Game.Core;
@@ -49,13 +49,13 @@ namespace Game.Global
 
         private void OnPlanetOwnerChange(Planet planet, int controllerId)
         {
-            planet.transform.Find("HealthBar/Bar/BarSprite").GetComponent<SpriteRenderer>().color = 
+            planet.transform.Find("Indexes/HealthBar/Bar/BarSprite").GetComponent<SpriteRenderer>().color = 
                 (planet.owner.id == Vars.DEFAULT_PLAYER_ID) ? homeBarColor : enermyBarColor;
         }
 
         private HealthBar GetHealthBar(Transform t)
         {
-            return t.Find("HealthBar").GetComponent<HealthBar>();
+            return t.Find("Indexes/HealthBar").GetComponent<HealthBar>();
         }
     }
 }
