@@ -6,17 +6,40 @@ namespace Game.Control
 
         [SerializeField] float maxZoomSize;
         [SerializeField] float minZoomSize;
-        [SerializeField] float zoomSpeed;
+        [SerializeField] float zoomSpeed;        
 
         Vector3 lastMouseClickPosition;
 
-        private void Update()
-        {
-            PanCamera();
+        bool isZooming;
+        [SerializeField] float zoomAccuracy;
+        [SerializeField] float defaultPlayerZoomSize;
+        [SerializeField] float zoomTiltSpeed;
 
+        private void Start() {
+            GetCamera().orthographicSize = maxZoomSize;
+            isZooming = true;
         }
 
-        private void PanCamera()
+        private void Update()
+        {
+                        
+            if(isZooming) 
+            {
+                GetCamera().orthographicSize = Mathf.Lerp(GetCamera().orthographicSize, defaultPlayerZoomSize, zoomTiltSpeed * Time.deltaTime);
+
+                if(Mathf.Abs(GetCamera().orthographicSize - defaultPlayerZoomSize) < zoomAccuracy)
+                {
+                    isZooming = false;
+                }
+
+                return;
+            }
+
+            UpdatePanCamera();
+            UpdateZoomCamera();
+        }
+
+        private void UpdatePanCamera()
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -27,12 +50,10 @@ namespace Game.Control
             {
                 Vector3 distance = lastMouseClickPosition - GetMousePosition();
                 transform.position += distance;
-            }
-
-            ZoomCamera();
+            }            
         }
 
-        public void ZoomCamera()
+        public void UpdateZoomCamera()
         {
             float newSize = GetCamera().orthographicSize - zoomSpeed * MouseScrollDelta();
             GetCamera().orthographicSize = Mathf.Clamp(newSize, minZoomSize, maxZoomSize);
