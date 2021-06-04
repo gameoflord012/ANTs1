@@ -27,7 +27,7 @@ namespace Game.Control
         public void UpgradeBehaviour(Planet planet)
         {
             if(planet.IsOwned(id))
-                Utils.LoadPlanetNextUpdate(planet);
+                Utils.Instance.LoadPlanetNextUpgrade(planet);
         }
 
         public void AttackBehaviour(Planet target)
@@ -73,6 +73,7 @@ namespace Game.Control
                 result = IsFighterBetter(result, fighter, target) ? result : fighter;
             }
 
+            if(result == null) return;
             autoSelectedPlanet = result.GetComponent<Planet>();
         }
         
@@ -107,6 +108,7 @@ namespace Game.Control
                 result = IsExplorerBetter(result, explorer, target) ? result : explorer;                
             }
 
+            if(result == null) return;
             autoSelectedPlanet = result.GetComponent<Planet>();
         }
 

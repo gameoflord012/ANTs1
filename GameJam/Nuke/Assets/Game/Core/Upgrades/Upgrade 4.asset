@@ -23,3 +23,4 @@ MonoBehaviour:
   healRate: 5
   additionExplorer: 3
   cost: 10
+  upgradeTime: 3

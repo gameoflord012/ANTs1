@@ -52,7 +52,7 @@ namespace Game.Control
 
         public void DebugBehaviour(Planet planet)
         {
-            Debug.Log(planet.currentStates[1].GetType().FullName);
+            Debug.Log(planet.currentStates[0].GetType().FullName);
         }
 
         private void OnMouseDoubleClick()

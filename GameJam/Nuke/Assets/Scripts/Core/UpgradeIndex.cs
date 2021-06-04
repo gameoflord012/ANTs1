@@ -15,5 +15,7 @@ namespace Game.Core
 
         public int additionExplorer;
         public int cost;
+
+        public float upgradeTime;
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -117,12 +118,11 @@ namespace Game.Global
         public static bool LoadPlanetUpgrade(Planet planet, UpgradeIndex upgrade)
         {            
             if(GetController(planet) != null && !GetController(planet).DecreaseResources(upgrade.cost)) return false;
-
+            
             planet.currentUpgrade = upgrade;
 
             planet.GetComponent<Fighter>().projectilePrefab = upgrade.nukeProjectilePrefab;
             planet.GetComponent<Explorer>().projectilePrefab = upgrade.explorerProjectilePrefab;
-
             planet.GetComponent<Health>().SetMaxHealth(upgrade.maxHealth);
 
             planet.maxNukeSlot = upgrade.maxNukeSlot;
@@ -131,29 +131,43 @@ namespace Game.Global
             planet.healRate = upgrade.healRate;
 
             planet.numberOfCurrentExplorers += upgrade.additionExplorer;
-
             return true;
         }
 
-        public static void LoadPlanetNextUpdate(Planet planet)
-        {                    
-            int id = GetNextUpgradeId(planet);
-            if(id == -1) return;
+        private IEnumerator UpgradeCoroutine(Planet planet, UpgradeIndex upgrade)
+        {
+            if(GetController(planet) != null && !GetController(planet).DecreaseResources(upgrade.cost)) yield return null;
 
-            if(LoadPlanetUpgrade(planet, Vars.Instance.upgrades[id]))
-            {
-                Events.Instance.OnPlanetUpgrade(planet.transform);
-            }
+            planet.isIndexUpgrading = true;
+            Events.Instance.OnPlanetStartUpgrade(planet, upgrade.upgradeTime);
+
+            yield return new WaitForSeconds(upgrade.upgradeTime);            
+            LoadPlanetUpgrade(planet, upgrade);
+            
+            planet.isIndexUpgrading = false;
+            Events.Instance.OnPlanetFinishedUpgrade(planet);
+
+            yield return null;
         }
 
-        private static int GetNextUpgradeId(Planet planet)
+        public void LoadPlanetNextUpgrade(Planet planet)
         {
-            int upgradeId = Array.IndexOf(Vars.Instance.upgrades, planet.currentUpgrade);
+            if(planet.isIndexUpgrading) return;
+            UpgradeIndex nextUpgrade = GetNextUpgrade(planet);
+
+            if(nextUpgrade == null) return;
+            StartCoroutine(UpgradeCoroutine(planet, nextUpgrade));
+        }
+
+        private UpgradeIndex GetNextUpgrade(Planet planet)
+        {
+            UpgradeIndex[] upgrades = Vars.Instance.upgrades;
+            int upgradeId = Array.IndexOf(upgrades, planet.currentUpgrade);
 
             if(upgradeId == -1) Debug.LogException(new Exception("Upgrade not found"));
 
-            int nextUpgradeId = upgradeId + 1;
-            return (nextUpgradeId == Vars.Instance.upgrades.Length) ? -1 : nextUpgradeId;
+            int nextUpgradeId = upgradeId + 1;            
+            return (nextUpgradeId == upgrades.Length) ? null : upgrades[nextUpgradeId];
         }
 
         public static List<Planet> GetNukeShooters(int controllerId)

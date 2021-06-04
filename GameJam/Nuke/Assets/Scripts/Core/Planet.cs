@@ -19,6 +19,7 @@ namespace Game.Core
         public Controller owner;
         public int numberOfCurrentNukes = 3;
         public int numberOfCurrentExplorers = 0;
+        public bool isIndexUpgrading = false;
 
         float timeSinceLastGainResources = Mathf.Infinity;        
         float timeSinceLastGainNuke = Mathf.Infinity;
@@ -36,9 +37,8 @@ namespace Game.Core
         }
 
         private void Start()
-        {
+        {            
             LoadState();
-
             LoadUpgrade();
         }
 
@@ -50,7 +50,7 @@ namespace Game.Core
                     ChangeState(i, new PlanetUnexplored(this, i));
             }
             else
-            {
+            {                                
                 ChangeState(owner.id, new PlanetExplored(this, owner));
                 ChangeState(owner.id, new PlanetOwned(this, owner));
             }
@@ -65,7 +65,7 @@ namespace Game.Core
         }
 
         public void ChangeState(int id, IPlanetState state)
-        {            
+        {
             if(currentStates[id] != null)
             {
                 currentStates[id].OnStateExit();
@@ -74,6 +74,8 @@ namespace Game.Core
                 
             currentStates[id] = state;
             currentStates[id].OnStateEnter();
+
+            Events.Instance.OnPlanetStateChange(this, id);
         }
 
         public bool IsExplorable(int id)

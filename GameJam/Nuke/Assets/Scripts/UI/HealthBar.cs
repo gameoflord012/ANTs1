@@ -16,6 +16,9 @@ namespace Game.UI
         public void UpdateHealthBar()
         {
             Transform bar = transform.Find("Bar");
+            if(bar == null) return;
+
+            if(maxHealth == 0) return;
 
             ratio = health / maxHealth;
             bar.localScale = new Vector2(ratio, 1);

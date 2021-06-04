@@ -2,7 +2,7 @@
 
 namespace Game.Global
 {
-    public class InputManager : MonoBehaviour {
+    public class InputManager : Singleton<InputManager> {
         protected InputManager() { }
 
         [SerializeField] float TIME_BETWEEN_DOUBLE_CLICKS = 0.2f;

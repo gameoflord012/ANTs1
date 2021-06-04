@@ -23,7 +23,7 @@ namespace Game.Core
         }
 
         private Planet GetTargetPlanet()
-        {
+        {            
             return target.GetComponent<Planet>();
         }
 

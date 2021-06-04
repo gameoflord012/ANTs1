@@ -30,11 +30,18 @@ namespace Game.Global
             OnNukeCollideEvent?.Invoke(transform);
         }
 
-        public event Action<Transform> OnPlanetUpgradeEvent;
-        public void OnPlanetUpgrade(Transform transform)
+        public event Action<Planet, float> OnPlanetStartUpgradeEvent;
+        public void OnPlanetStartUpgrade(Planet transform, float upgradeTime)
         {
-            Debug.Log("Planet upgrade");
-            OnPlanetUpgradeEvent?.Invoke(transform);
+            Debug.Log("Planet start upgrade");
+            OnPlanetStartUpgradeEvent?.Invoke(transform, upgradeTime);
+        }
+
+        public event Action<Planet> OnPlanetFinishedUpgradeEvent;
+        public void OnPlanetFinishedUpgrade(Planet transform)
+        {
+            Debug.Log("Planet finished upgrade");
+            OnPlanetFinishedUpgradeEvent?.Invoke(transform);
         }
 
         
@@ -74,21 +81,18 @@ namespace Game.Global
         public event Action<Health> OnHealthUpdateEvent;
         public void OnHealthUpdate(Health health)
         {
-            Debug.Log("Health Update");
             OnHealthUpdateEvent?.Invoke(health);
         }
 
         public event Action<Health> OnMaxHealthUpdateEvent;
         public void OnMaxHealthUpdate(Health health)
         {
-            Debug.Log("Max Health Update");
             OnMaxHealthUpdateEvent?.Invoke(health);
         }
 
         public event Action<Planet, int> OnPlanetOwnerChangeEvent;
         public void OnPlanetOwnerChange(Planet planet, int controllerId)
         {
-            Debug.Log("Max Health Update");
             OnPlanetOwnerChangeEvent?.Invoke(planet, controllerId);
         }
 
@@ -102,6 +106,12 @@ namespace Game.Global
         public void OnExplorerNumberUpdate(Planet planet, int number)
         {
             OnExplorerNumberUpdateEvent?.Invoke(planet, number);
+        }
+
+        public event Action<Planet, int> OnPlanetStateChangeEvent;
+        public void OnPlanetStateChange(Planet planet, int controllerId)
+        {
+            OnPlanetStateChangeEvent?.Invoke(planet, controllerId);
         }
     }
 }
