@@ -21,7 +21,9 @@ namespace Game.AI
         }
         public void UpdatePath()
         {
+            Vector2 delta = GetTargetPosition() - GetCurrentPosition();
             rb.MovePosition(Vector2.Lerp(GetCurrentPosition(), GetTargetPosition(), tiltSpeed * Time.deltaTime));
+            rb.SetRotation(Mathf.Atan2(delta.y, delta.x) * Mathf.Rad2Deg - 90);
         }
 
         Vector2 GetTargetPosition()

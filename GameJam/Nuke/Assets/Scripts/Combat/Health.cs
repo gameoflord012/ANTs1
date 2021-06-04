@@ -22,7 +22,7 @@ namespace Game.Combat
             SetHealth(health);
         }
 
-        private void SetHealth(int health)
+        public void SetHealth(int health)
         {
             this.health = Mathf.Clamp(this.health + health, 0, maxHealth);
             Events.Instance.OnHealthUpdate(this);

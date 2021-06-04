@@ -7,6 +7,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 842993015400886469, guid: da2bf421683ac784b8e21c50b54ef9b7,
+        type: 3}
+      propertyPath: tiltSpeed
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4435339458968753292, guid: da2bf421683ac784b8e21c50b54ef9b7,
         type: 3}
       propertyPath: m_RootOrder
@@ -82,5 +87,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Nuke 3
       objectReference: {fileID: 0}
+    - target: {fileID: 5142672578534655461, guid: da2bf421683ac784b8e21c50b54ef9b7,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 3b6dd5c6b7a277d4f9ecf0a4d366ebc2,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da2bf421683ac784b8e21c50b54ef9b7, type: 3}
