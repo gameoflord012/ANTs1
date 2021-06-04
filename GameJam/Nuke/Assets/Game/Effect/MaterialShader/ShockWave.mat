@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Flash1
+  m_Name: ShockWave
   m_Shader: {fileID: -6465566751694194690, guid: fbe26168f3f83fb479f7958cd01ecc69,
     type: 3}
   m_ShaderKeywords: 
@@ -21,9 +21,9 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - Texture2D_C0D32BC3:
-        m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
+        m_Texture: {fileID: 2800000, guid: 4e8b9c252d6110043ae3be91331f1868, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats: []
     m_Colors:
-    - Color_EB29E34B: {r: 0.2842292, g: 0.2842292, b: 0.2842292, a: 0.50980395}
+    - Color_EB29E34B: {r: 0.4963229, g: 0.4963229, b: 0.4963229, a: 0}
