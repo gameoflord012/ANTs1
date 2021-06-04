@@ -180,8 +180,9 @@ namespace Game.Core
             }
         }
 
-        internal void SetOwner(Controller controller)
+        public void SetOwner(Controller controller)
         {
+            owner = controller;
             Events.Instance.OnPlanetOwnerChange(this, controller.id);
         }
     }    

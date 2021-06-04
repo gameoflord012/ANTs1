@@ -71,38 +71,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6052936113397808071, guid: 2e7bf5e7a84f3f142b291da539ddddac,
         type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
+      propertyPath: m_LocalScale.x
+      value: 1.6674
       objectReference: {fileID: 0}
     - target: {fileID: 6052936113397808071, guid: 2e7bf5e7a84f3f142b291da539ddddac,
         type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
+      propertyPath: m_LocalScale.y
+      value: 1.6674
       objectReference: {fileID: 0}
     - target: {fileID: 6052936113397808071, guid: 2e7bf5e7a84f3f142b291da539ddddac,
         type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6052936113397808071, guid: 2e7bf5e7a84f3f142b291da539ddddac,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6052936113397808071, guid: 2e7bf5e7a84f3f142b291da539ddddac,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6052936113397808071, guid: 2e7bf5e7a84f3f142b291da539ddddac,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6052936113397808071, guid: 2e7bf5e7a84f3f142b291da539ddddac,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
+      propertyPath: m_LocalScale.z
+      value: 1.6674
       objectReference: {fileID: 0}
     - target: {fileID: 6052936113397808071, guid: 2e7bf5e7a84f3f142b291da539ddddac,
         type: 3}
@@ -124,6 +104,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Planet2
       objectReference: {fileID: 0}
+    - target: {fileID: 6703957300956836604, guid: 2e7bf5e7a84f3f142b291da539ddddac,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e51c77405e9763a4894422d7e0e6adf0,
+        type: 3}
     m_RemovedComponents:
     - {fileID: 1375773073718771267, guid: 2e7bf5e7a84f3f142b291da539ddddac, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2e7bf5e7a84f3f142b291da539ddddac, type: 3}
