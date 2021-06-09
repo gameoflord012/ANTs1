@@ -3,20 +3,22 @@ using UnityEngine;
 
 namespace Game.Core
 {
-    public class ObjectCell : MonoBehaviour
+    public class Cell : MonoBehaviour
     {
         [HideInInspector]
         public Vector2Int cellPosition;
 
-        GameMatrix container;
-
-        private void Start() {
-            container = FindObjectOfType<GameMatrix>();
-
-            cellPosition = GetVector2(container.tilemap.WorldToCell(transform.position));
-            container.AddCell(this);
+        private void Start()
+        {
+            cellPosition = GetVector2(GetGameMatrix().tilemap.WorldToCell(transform.position));
+            GetGameMatrix().AddCell(this);
 
             ChildClassStart();
+        }
+
+        private static GameMatrix GetGameMatrix()
+        {
+            return FindObjectOfType<GameMatrix>();
         }
 
         private Vector2Int GetVector2(Vector3Int v)

@@ -4,7 +4,7 @@ using Game.Core;
 
 namespace Game.Control
 {
-    public class AIController : ObjectCell, IPlayable
+    public class AIController : Cell, IPlayable
     {
         public int TeamId { get => Vars.c_defaultAITeamID; }
 

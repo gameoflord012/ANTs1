@@ -9,8 +9,8 @@ namespace Game.Core
     public class GameMatrix : MonoBehaviour {
         public Tilemap tilemap;
 
-        Dictionary<Vector2Int, ObjectCell> enemies = new Dictionary<Vector2Int, ObjectCell>();
-        ObjectCell player;
+        Dictionary<Vector2Int, Cell> enemies = new Dictionary<Vector2Int, Cell>();
+        Cell player;
 
         TurnbaseLogic logic;
 
@@ -18,7 +18,7 @@ namespace Game.Core
             logic = new TurnbaseLogic(Vars.c_numberOfSide);
         }
 
-        public void AddCell(ObjectCell cell)
+        public void AddCell(Cell cell)
         {
             if(cell is PlayerController)
             {
