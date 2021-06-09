@@ -16,7 +16,7 @@ namespace Game.Core
             ChildClassStart();
         }
 
-        private static GameMatrix GetGameMatrix()
+        private GameMatrix GetGameMatrix()
         {
             return FindObjectOfType<GameMatrix>();
         }

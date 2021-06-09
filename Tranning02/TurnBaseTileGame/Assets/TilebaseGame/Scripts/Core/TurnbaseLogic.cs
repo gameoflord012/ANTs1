@@ -7,7 +7,7 @@ namespace Game.Core
         int currentTurn = 0;
         int maxTurn;
 
-        Dictionary<int, List<IPlayable>> idToPlayableObject = new Dictionary<int, List<IPlayable>>();
+        Dictionary<int, List<IPlayable>> idToPlayableObjects = new Dictionary<int, List<IPlayable>>();
 
         public TurnbaseLogic(int numTeam)
         {
@@ -15,21 +15,21 @@ namespace Game.Core
 
             for(int i = 0; i < maxTurn; i++)
             {
-                idToPlayableObject.Add(i, new List<IPlayable>());
+                idToPlayableObjects.Add(i, new List<IPlayable>());
             }
         }
 
         public void addPlayable(IPlayable playable)
         {
-            if(!idToPlayableObject.ContainsKey(playable.TeamId))
+            if(!idToPlayableObjects.ContainsKey(playable.TeamId))
                 Debug.LogError("Invalid teamId");
 
-            idToPlayableObject[playable.TeamId].Add(playable);
+            idToPlayableObjects[playable.TeamId].Add(playable);
         }
 
         public void ProgressNextTurn()
         {
-            foreach(IPlayable playable in idToPlayableObject[currentTurn])
+            foreach(IPlayable playable in idToPlayableObjects[currentTurn])
                 playable.DoAction();
 
             currentTurn = (currentTurn + 1) % maxTurn;

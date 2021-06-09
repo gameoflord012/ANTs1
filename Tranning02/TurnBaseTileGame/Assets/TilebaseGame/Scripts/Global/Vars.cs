@@ -8,8 +8,8 @@ namespace Game.Global
         protected Vars() {}
 
         public const int c_numberOfSide = 2;
-        public const int c_defaultPlayerTeamID = 0;
-        public const int c_defaultAITeamID = 1;
+        public const int c_defaultPlayerTeamId = 0;
+        public const int c_defaultAITeamId = 1;
 
         public int currentId = 1;
 

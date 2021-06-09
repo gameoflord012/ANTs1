@@ -6,7 +6,7 @@ namespace Game.Control
 {
     public class PlayerController : Cell, IPlayable
     {
-        public int TeamId { get => Vars.c_defaultPlayerTeamID; }
+        public int TeamId { get { return Vars.c_defaultPlayerTeamId; } }
 
         public void DoAction()
         {
