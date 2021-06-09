@@ -3,3 +3,9 @@
 
 # Editors
 ### Use Vscode
+
+# Code Conventions
+### Variable
+#### Constant prefix with k_
+#### Member variable prefix with m_
+
