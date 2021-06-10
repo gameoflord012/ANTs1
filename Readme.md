@@ -24,3 +24,23 @@ and, somewhere a little more distant, `XYZControllerForEfficientStorageOfStrings
 
    > If you have another called `ProductInfo` or `ProductData`, you have made the names different without making them mean anything different. `Info` and `Data` are indistinct noise words like `a`, `an`, and `the`.
 
+## Use Pronounceable Names
+
+Compare
+```
+   class DtaRcrd102 {
+      private Date genymdhms;
+      private Date modymdhms;
+      private final String pszqint = "102";
+      /* ... */
+};
+```
+to
+```
+   class Customer {
+      private Date generationTimestamp;
+      private Date modificationTimestamp;;
+      private final String recordId = "102";
+      /* ... */
+   };
+```
