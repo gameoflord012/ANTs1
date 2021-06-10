@@ -1,3 +1,13 @@
+- [Build with Unity](#build-with-unity)
+- [Editors](#editors)
+- [Cleancode Code Conventions](#cleancode-code-conventions)
+  * [Use Intention-Revealing Names](#use-intention-revealing-names)
+  * [Avoid Disinformation](#avoid-disinformation)
+  * [Make Meaningful Distinctions](#make-meaningful-distinctions)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
+
 # Build with Unity
 Version 2019.4.26f1
 
