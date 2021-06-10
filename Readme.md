@@ -5,10 +5,10 @@ Version 2019.4.26f1
 Use Vscode
 
 # Cleancode Code Conventions
-The name of a variable, function, or class, should answer all the big questions. It
-should tell you why it exists, what it does, and how it is used. 
 
 ## Use Intention-Revealing Names
+The name of a variable, function, or class, should answer all the big questions. It
+should tell you why it exists, what it does, and how it is used. 
 
 ## Avoid Disinformation
 1. Avoid leaving false clues that obscure the meaning of code:
