@@ -44,14 +44,12 @@ to
 
 ## Use Searchable Names
 1. Single-letter names can **ONLY** be used as local variables inside short methods.
-
-   compare
    ```java
       for (int j=0; j<34; j++) {
          s += (t[j]*4)/5;
       }
    ```
-   to
+   ---
    ```java
       int realDaysPerIdealDay = 4;
       const int WORK_DAYS_PER_WEEK = 5;
@@ -65,4 +63,22 @@ to
 
 ## Avoid Encodings
 ### Member Prefixes
-1. You also don’t need to prefix member variables with m_ anymore. Your classes and functions should be small enough that you don’t need them. 
+1. You also don’t need to prefix member variables with m_ anymore. Your classes and functions should be small enough that you don’t need them.
+   ```java
+      public class Part {
+         private String m_dsc; // The textual description
+            void setName(String name) {
+            m_dsc = name;
+         }
+      }
+   ```
+   ---
+   ```java
+   public class Part {
+   String description;
+      void setDescription(String description) {
+         this.description = description;
+      }
+   }
+   ```
+
