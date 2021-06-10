@@ -16,6 +16,8 @@ namespace Game.Core
             ChildClassStart();
         }
 
+        protected virtual void ChildClassStart() {}
+
         private GameMatrix GetGameMatrix()
         {
             return FindObjectOfType<GameMatrix>();
@@ -25,7 +27,5 @@ namespace Game.Core
         {
             return new Vector2Int(v.x, v.y);
         }
-
-        protected virtual void ChildClassStart() {}
     }
 }

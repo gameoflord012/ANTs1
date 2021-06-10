@@ -18,23 +18,23 @@ namespace Game.Core
             logic = new TurnbaseLogic(Vars.NUMBER_OF_TEAM);
         }
 
+        public void ProgressNextTurn()
+        {
+            logic.ProgressNextTurn();
+        }
+
         public void AddAndClassify(Cell cell)
         {
             if(cell is PlayerController)
             {
                 player = cell;
-                logic.AddToTeamGroup(cell as IPlayable);
+                logic.AddToTeam(cell as IPlayable);
             }
             if(cell is AIController)
             {
                 enemies[cell.cellPosition] = cell;
-                logic.AddToTeamGroup(cell as IPlayable);
+                logic.AddToTeam(cell as IPlayable);
             }
-        }
-
-        public void ProgressNextTurn()
-        {
-            logic.ProgressNextTurn();
         }
     }
 }
