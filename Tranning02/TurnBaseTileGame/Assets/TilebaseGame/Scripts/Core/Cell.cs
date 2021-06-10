@@ -11,7 +11,7 @@ namespace Game.Core
         private void Start()
         {
             cellPosition = GetVector2(GetGameMatrix().tilemap.WorldToCell(transform.position));
-            GetGameMatrix().AddCell(this);
+            GetGameMatrix().AddAndClassify(this);
 
             ChildClassStart();
         }

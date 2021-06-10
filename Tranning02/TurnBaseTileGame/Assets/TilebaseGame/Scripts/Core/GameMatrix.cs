@@ -15,20 +15,20 @@ namespace Game.Core
         TurnbaseLogic logic;
 
         private void Awake() {
-            logic = new TurnbaseLogic(Vars.c_numberOfSide);
+            logic = new TurnbaseLogic(Vars.NUMBER_OF_TEAM);
         }
 
-        public void AddCell(Cell cell)
+        public void AddAndClassify(Cell cell)
         {
             if(cell is PlayerController)
             {
                 player = cell;
-                logic.addPlayable(cell as IPlayable);
+                logic.AddToTeamGroup(cell as IPlayable);
             }
             if(cell is AIController)
             {
                 enemies[cell.cellPosition] = cell;
-                logic.addPlayable(cell as IPlayable);
+                logic.AddToTeamGroup(cell as IPlayable);
             }
         }
 
