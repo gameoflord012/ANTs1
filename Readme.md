@@ -88,3 +88,7 @@ of a class. A class name should not be a verb.
 Methods should have verb or verb phrase names like `postPayment`, `deletePage`, or `save`.
 **Accessors**, **mutators**, and **predicates** should be named for their value and prefixed with `get`,
 `set`, and `is`.
+
+For instance, it’s confusing to
+have fetch, retrieve, and get as equivalent methods of different classes. How do you
+remember which method name goes with which class
