@@ -46,13 +46,13 @@ to
 1. Single-letter names can **ONLY** be used as local variables inside short methods.
 
    compare
-   ```
+   ```java
       for (int j=0; j<34; j++) {
          s += (t[j]*4)/5;
       }
    ```
    to
-   ```
+   ```java
       int realDaysPerIdealDay = 4;
       const int WORK_DAYS_PER_WEEK = 5;
       int sum = 0;
