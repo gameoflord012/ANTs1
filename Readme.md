@@ -22,8 +22,6 @@ and, somewhere a little more distant, `XYZControllerForEfficientStorageOfStrings
    > If you have another called `ProductInfo` or `ProductData`, you have made the names different without making them mean anything different. `Info` and `Data` are indistinct noise words like `a`, `an`, and `the`.
 
 ## Use Pronounceable Names
-
-Compare
 ```java
    class DtaRcrd102 {
       private Date genymdhms;
@@ -32,7 +30,7 @@ Compare
       /* ... */
 };
 ```
-to
+---
 ```java
    class Customer {
       private Date generationTimestamp;
@@ -44,41 +42,41 @@ to
 
 ## Use Searchable Names
 1. Single-letter names can **ONLY** be used as local variables inside short methods.
-   ```java
-      for (int j=0; j<34; j++) {
-         s += (t[j]*4)/5;
-      }
-   ```
-   ---
-   ```java
-      int realDaysPerIdealDay = 4;
-      const int WORK_DAYS_PER_WEEK = 5;
-      int sum = 0;
-      for (int j=0; j < NUMBER_OF_TASKS; j++) {
-         int realTaskDays = taskEstimate[j] * realDaysPerIdealDay;
-         int realTaskWeeks = (realdays / WORK_DAYS_PER_WEEK);
-         sum += realTaskWeeks;
-      }
-   ```
+```java
+   for (int j=0; j<34; j++) {
+      s += (t[j]*4)/5;
+   }
+```
+---
+```java
+   int realDaysPerIdealDay = 4;
+   const int WORK_DAYS_PER_WEEK = 5;
+   int sum = 0;
+   for (int j=0; j < NUMBER_OF_TASKS; j++) {
+      int realTaskDays = taskEstimate[j] * realDaysPerIdealDay;
+      int realTaskWeeks = (realdays / WORK_DAYS_PER_WEEK);
+      sum += realTaskWeeks;
+   }
+```
 
 ## Avoid Encodings
 ### Member Prefixes
 1. You also don’t need to prefix member variables with m_ anymore. Your classes and functions should be small enough that you don’t need them.
-   ```java
-      public class Part {
-         private String m_dsc; // The textual description
-            void setName(String name) {
-            m_dsc = name;
-         }
-      }
-   ```
-   ---
-   ```java
+```java
    public class Part {
-   String description;
-      void setDescription(String description) {
-         this.description = description;
+      private String m_dsc; // The textual description
+         void setName(String name) {
+         m_dsc = name;
       }
    }
-   ```
+```
+---
+```java
+public class Part {
+String description;
+   void setDescription(String description) {
+      this.description = description;
+   }
+}
+```
 
