@@ -27,7 +27,7 @@ and, somewhere a little more distant, `XYZControllerForEfficientStorageOfStrings
 ## Use Pronounceable Names
 
 Compare
-```c#
+```java
    class DtaRcrd102 {
       private Date genymdhms;
       private Date modymdhms;
@@ -36,7 +36,7 @@ Compare
 };
 ```
 to
-```c#
+```java
    class Customer {
       private Date generationTimestamp;
       private Date modificationTimestamp;;
