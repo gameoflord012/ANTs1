@@ -4,3 +4,11 @@
 # Editors
 ###### Use Vscode
 
+# Cleancode Code Conventions
+
+#### Avoid Disinformation
+
+
+
+
+
