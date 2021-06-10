@@ -95,3 +95,19 @@ Remember that the people who read your code will be programmers. So go ahead and
 There are a few names which are meaningful in and of themselves—most are not. Instead, you need to place names in context for your reader by enclosing them in well-named classes, functions, or namespaces. When all else fails, then prefixing the name may be necessary as a last resort.
 
 # Chapter 3: Functions
+
+## Small!
+The first rule of functions is that they should be small. The second rule of functions is that _they should be smaller than that_.
+   - The blocks within `if` statements, `else` statements, while statements, and so on should be one line long.
+
+   - This also implies that functions should not be large enough to hold nested structures. The indent level of a function should not be greater than one or two.
+
+## Do One Thing
+*Function should do one thing. They should do it well. They should do it only.*
+   - If a function does only those steps that are one level below the stated name of the function, then the function is doing one thing.
+
+   - The reason we write functions is to decompose a larger concept (in other words, the name of the function) into a set of steps at the next level of abstraction
+
+## One Level of Abstraction per Function
+In order to make sure our functions are doing “one thing,” we need to make sure that the statements within our function are all at the same level of abstraction. Example of bad code function:
+   > A function which there are concepts in there that are at a very high level of abstraction, such as `getHtml()`; others that are at an intermediate level of abstraction, such as: `String pagePathName = PathParser.render(pagePath);` and still others that are remarkably low level, such as: `.append("\n")`.
