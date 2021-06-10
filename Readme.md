@@ -1,10 +1,7 @@
 # Build with Unity
-Version 2019.4.26f1
+Version 2019.4.27f1
 
-# Editors
-Use Vscode
-
-# Cleancode Code Conventions
+# Clean Code Conventions
 
 ## Use Intention-Revealing Names
 The name of a variable, function, or class, should answer all the big questions. It
