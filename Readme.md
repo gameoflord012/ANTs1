@@ -44,3 +44,6 @@ to
       /* ... */
    };
 ```
+
+## Use Searchable Names
+1. Single-letter names can **ONLY** be used as local variables inside short methods.
