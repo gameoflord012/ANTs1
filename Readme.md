@@ -21,5 +21,6 @@ and, somewhere a little more distant, `XYZControllerForEfficientStorageOfStrings
 
 ## Make Meaningful Distinctions
 1. If names must be different, then they should also mean something different.
+
    - If you have another called `ProductInfo` or `ProductData`, you have made the names different without making them mean anything different. `Info` and `Data` are indistinct noise words like `a`, `an`, and `the`.
 
