@@ -474,3 +474,21 @@ public void registerItem(Item item) {
 }
 ```
 If you work in a code base with code like this, it might not look all that bad to you, but it is bad! When we return null, we are essentially creating work for ourselves and foisting problems upon our callers.
+
+Imagine that you have code like this:
+```java
+List<Employee> employees = getEmployees();
+if (employees != null) {
+   for(Employee e : employees) {
+      totalPay += e.getPay();
+   }
+}
+```
+Right now, getEmployees can return null, but does it have to? If we change `getEmployee` so that it returns an empty list, we can clean up the code:
+```java
+List<Employee> employees = getEmployees();
+for(Employee e : employees) {
+   totalPay += e.getPay();
+}
+```
+If you code this way, you will minimize the chance of NullPointerExceptions and your code will be cleaner.
