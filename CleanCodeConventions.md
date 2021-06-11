@@ -458,7 +458,7 @@ If ctxt is an object, we should be telling it to do *something*. So, what if we 
 BufferedOutputStream bos = ctxt.createScratchFileStream(classFileName);
 ```
 
-# Chapter 4: Error Handling
+# Chapter 5: Error Handling
 ## Don’t Return Null
 ```java
 public void registerItem(Item item) {
@@ -492,3 +492,70 @@ for(Employee e : employees) {
 }
 ```
 If you code this way, you will minimize the chance of NullPointerExceptions and your code will be cleaner.
+
+# Chapter 6: Class
+## Class Organization
+Following the standard Java convention, a class should begin with a list of variables.
+   1. Public static constants, if any, should come first.
+   2. Then private static variables.
+   3. Followed by private instance variables.
+   4. There is seldom a good reason to have a public variable.
+
+## Classes Should Be Small!
+The first rule of classes is that they should be small. The second rule of classes is that they should be smaller than that.
+
+The name of a class should describe what responsibilities it fulfills. In fact, naming is probably the first way of helping determine class size.
+   > For example, class names including weasel words like `Processor` or `Manager` or `Super` often hint at unfortunate aggregation of responsibilities.
+
+## The Single Responsibility Principle
+The [Single Responsibility Principle](https://en.wikipedia.org/wiki/Single-responsibility_principle) states that a class or module should have one, and only one, reason to change.
+
+This principle gives us both a definition of responsibility, and a guidelines for class size. Classes should have one responsibility—one reason to change.
+
+We want our systems to be composed of many small classes, not a few large ones. Each small class encapsulates a single responsibility, has a single reason to change, and collaborates with a few others to achieve the desired system behaviors.
+
+## Cohesion
+Classes should have a small number of instance variables. Each of the methods of a class should manipulate one or more of those variables. In general the more variables a method manipulates the more cohesive that method is to its class.
+
+The strategy of keeping functions small and keeping parameter lists short can sometimes lead to a proliferation of instance variables that are used by a subset of methods.
+
+When this happens, it almost always means that there is at least one other class trying to get out of the larger class. You should try to separate the variables and methods into two or more classes such that the new classes are more cohesive.
+
+# Chapter 7: Emergence
+## Getting Clean via Emergent Design
+What if there were four simple rules that you could follow that would help you create good designs as you worked? According to Kent, a design is “simple” if it follows these rules:
+   - Runs all the tests
+   - Contains no duplication
+   - Expresses the intent of the programmer
+   - Minimizes the number of classes and methods
+
+The rules are given in order of importance
+
+## Simple Design Rule 1: Runs All the Tests
+## Simple Design Rules 2–4: Refactoring
+During this refactoring step, we can apply anything from the entire body of knowledge about good software design. We can increase cohesion, decrease coupling, separate concerns, modularize system concerns, shrink our functions and classes, choose better names, and so on.
+
+This is also where we apply the final three rules of simple design: Eliminate duplication, ensure expressiveness, and minimize the number of classes and methods.
+
+## No Duplication
+Duplication is the primary enemy of a well-designed system. It represents additional work, additional risk, and additional unnecessary complexity.
+The [TEMPLATE METHOD](https://refactoring.guru/design-patterns/template-method) pattern is a common technique for removing higher-level
+duplication.
+
+## Expressive
+You can express yourself by choosing good names. We want to be able to hear a class or function name and not be surprised when we discover its responsibilities.
+
+You can also express yourself by keeping your functions and classes small. Small classes and functions are usually easy to name, easy to write, and easy to understand.
+
+You can also express yourself by using standard nomenclature. Design patterns, for example, are largely about communication and expressiveness. By using the standard pattern names, such as COMMAND or VISITOR, in the names of the classes that implement those patterns, you can succinctly describe your design to other developers
+
+## Minimal Classes and Methods
+In an effort to make our classes and methods small, we might create too many tiny classes and methods. So this rule suggests that we also keep our function and class counts low.
+
+# Chapter 8: Smells and Heuristic
+## Functions
+### F1: Too Many Arguments
+Functions should have a small number of arguments. No argument is best, followed by one, two, and three. More than three is very questionable and should be avoided.
+
+### F2: Output Arguments
+Output arguments are counterintuitive. Readers expect arguments to be inputs, not outputs. If your function must change the state of something, have it change the state of the object it is called on.
