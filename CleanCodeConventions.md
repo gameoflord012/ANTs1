@@ -176,8 +176,20 @@ public class EmployeeFactoryImpl implements EmployeeFactory {
 ## Function Arguments
 Three arguments should be avoided where possible. More than three requires very special justification—and then shouldn’t be used anyway.
 
+### Common Monadic Forms (Single Argument Function)
+You may be asking a question about that argument, as in `boolean fileExists(“MyFile”).`
+
+Or you may be operating on that argument, transforming it into something else and returning it. For example, `InputStream fileOpen(“MyFile”)` transforms a file name String into an InputStream return value.
 ### Flag Arguments
 Flag arguments are ugly. Passing a boolean into a function is a truly terrible practice, We should have split the function in two instead.
+   > Still, the method call `render(true)` is just plain confusing to a poor reader. Mousing over the call and seeing `render(boolean isSuite)` helps a little, but not that much. We should have split the function into two: `renderForSuite()` and `renderForSingleTest()`.
+
+### Dyadic Functions
+There are times, of course, where two arguments are appropriate. For example,
+Point `p = new Point(0,0);` is perfectly reasonable.
+
+You should be aware that they come at a cost and should take advantage of what mechanims may be available to you to convert them into monads.
+   > For example, you might make the `writeField` method a member of `outputStream` so that you can say `outputStream.writeField(name)`. Or you might make the `outputStream` a member variable of the current class so that you don’t have to pass it. Or you might extract a new class like `FieldWriter` that takes the `outputStream` in its constructor and has a write method.
 
 ### Argument Objects
 When a function seems to need more than two or three arguments, it is likely that some of those arguments ought to be wrapped into a class of their own.
@@ -211,3 +223,54 @@ In other words, it would be better for appendFooter to be invoked as
 ```java
 report.appendFooter();
 ```
+
+### Prefer Exceptions to Returning Error Codes
+When you return an error code, you create the problem that the caller must deal with the error immediately.
+
+```java
+if (deletePage(page) == E_OK)
+```
+---
+```java
+if (deletePage(page) == E_OK) {
+   if (registry.deleteReference(page.name) == E_OK) {
+      if (configKeys.deleteKey(page.name.makeKey()) == E_OK){
+         logger.log("page deleted");
+      } else {
+         logger.log("configKey not deleted");
+      }
+   } else {
+   logger.log("deleteReference from registry failed");
+   }
+} else {
+   logger.log("delete failed");
+   return E_ERROR;
+}
+```
+On the other hand, if you use exceptions instead of returned error codes, then the error processing code can be separated from the happy path code and can be simplified:
+```java
+try {
+   deletePage(page);
+   registry.deleteReference(page.name);
+   configKeys.deleteKey(page.name.makeKey());
+}
+catch (Exception e) {
+   logger.log(e.getMessage());
+}
+```
+
+## Don’t Repeat Yourself
+Duplication may be the root of all evil in software. Many principles and practices have been created for the purpose of controlling or eliminating it.
+
+## Structured Programming
+Dijkstra said that every function, and every block within a function, should have one entry and one exit. 
+   > Following these rules means that there should only be one return statement in a function, no `break` or `continue` statements in a loop, and never, ever, any `goto` statements.
+
+So if you keep your functions small, then the occasional multiple `return`, `break`, or `continue` statement does no harm and can sometimes even be more expressive than the single-entry, single-exit rule. On the other hand, `goto` only makes sense in large functions, so it should be avoided.
+
+## How Do You Write Functions Like This?
+When I write functions, they come out long and complicated. They have lots of indenting and nested loops. They have long argument lists. The names are arbitrary, and there is duplicated code. But I also have a suite of unit tests that cover every one of those clumsy lines of code.
+
+So then I massage and refine that code, splitting out functions, changing names, eliminating duplication. I shrink the methods and reorder them. Sometimes I break out whole classes, all the while keeping the tests passing.
+
+In the end, I wind up with functions that follow the rules I’ve laid down in this chapter. I don’t write them that way to start. I don’t think anyone could
