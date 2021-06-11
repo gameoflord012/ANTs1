@@ -240,7 +240,7 @@ if (deletePage(page) == E_OK) {
          logger.log("configKey not deleted");
       }
    } else {
-   logger.log("deleteReference from registry failed");
+      logger.log("deleteReference from registry failed");
    }
 } else {
    logger.log("delete failed");
@@ -273,4 +273,91 @@ When I write functions, they come out long and complicated. They have lots of in
 
 So then I massage and refine that code, splitting out functions, changing names, eliminating duplication. I shrink the methods and reorder them. Sometimes I break out whole classes, all the while keeping the tests passing.
 
-In the end, I wind up with functions that follow the rules I’ve laid down in this chapter. I don’t write them that way to start. I don’t think anyone could
+In the end, I wind up with functions that follow the rules I’ve laid down in this chapter. I don’t write them that way to start. I don’t think anyone could.
+
+# Chapter 3: Formatting
+
+## Vertical Formatting
+
+### Vertical Openness Between Concepts
+Each line represents an expression or a clause, and each group of lines represents a complete thought. Those thoughts should be separated from each other with blank lines.
+
+```java
+package fitnesse.wikitext.widgets;
+
+import java.util.regex.*;
+
+public class BoldWidget extends ParentWidget {
+   public static final String REGEXP = "'''.+?'''";
+   private static final Pattern pattern = Pattern.compile("'''(.+?)'''",
+      Pattern.MULTILINE + Pattern.DOTALL
+   );
+
+   public BoldWidget(ParentWidget parent, String text) throws Exception {
+      super(parent);
+      Matcher match = pattern.matcher(text);
+      match.find();
+      addChildWidgets(match.group(1));
+   }
+
+   public String render() throws Exception {
+      StringBuffer html = new StringBuffer("<b>");
+      html.append(childHtml()).append("</b>");
+      return html.toString();
+   }
+}
+```
+The difference between these two listings is a bit of vertical openness.
+```java
+package fitnesse.wikitext.widgets;
+import java.util.regex.*;
+public class BoldWidget extends ParentWidget {
+   public static final String REGEXP = "'''.+?'''";
+   private static final Pattern pattern = Pattern.compile("'''(.+?)'''",
+      Pattern.MULTILINE + Pattern.DOTALL);
+   public BoldWidget(ParentWidget parent, String text) throws Exception {
+      super(parent);
+      Matcher match = pattern.matcher(text);
+      match.find();
+      addChildWidgets(match.group(1));}
+   public String render() throws Exception {
+      StringBuffer html = new StringBuffer("<b>");
+      html.append(childHtml()).append("</b>");
+      return html.toString();
+   }
+}
+```
+### Vertical Distance
+We want to avoid forcing our readers to hop around through our source
+files and classes.
+
+   - #### Variable Declarations
+   Variables should be declared as close to their usage as possible. Because our functions are very short, local variables should appear a the top of    each function.
+
+   - #### Instance variables
+   on the other hand, should be declared at the top of the class.
+
+   - #### Dependent Functions
+   If one function calls another, they should be vertically close,
+and the caller should be above the callee, if at all possible
+
+   - #### Conceptual Affinity
+Certain bits of code want to be near other bits. They have a certain conceptual affinity. Affinity might be caused because a group of functions perform a similar operation.
+
+```java
+public class Assert {
+   static public void assertTrue(String message, boolean condition) {
+      if (!condition)
+         fail(message);
+   }
+   static public void assertTrue(boolean condition) {
+      assertTrue(null, condition);
+   }
+   static public void assertFalse(String message, boolean condition) {
+      assertTrue(message, !condition);
+   }
+   static public void assertFalse(boolean condition) {
+      assertFalse(null, condition);
+   }
+...
+```
