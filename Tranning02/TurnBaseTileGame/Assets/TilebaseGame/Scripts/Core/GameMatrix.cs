@@ -1,16 +1,14 @@
 using System.Collections.Generic;
-using UnityEngine.Tilemaps;
 using UnityEngine;
 using Game.Global;
 using Game.Control;
 
 namespace Game.Core
 {
-    public class GameMatrix : MonoBehaviour {
-        public Tilemap tilemap;
+    public class GameMatrix : ObjectMatrix {
 
-        Dictionary<Vector2Int, Cell> enemies = new Dictionary<Vector2Int, Cell>();
-        Cell player;
+        Dictionary<Vector2Int, ObjectGame> enemies = new Dictionary<Vector2Int, ObjectGame>();
+        ObjectGame player;
 
         TurnbaseLogic logic;
 
@@ -18,23 +16,29 @@ namespace Game.Core
             logic = new TurnbaseLogic(Vars.NUMBER_OF_TEAM);
         }
 
+        private void Start() {
+            foreach(Cell cell in cells)
+            {
+                AddObjectGame(cell as ObjectGame);
+            }
+        }
+
         public void ProgressNextTurn()
         {
             logic.ProgressNextTurn();
         }
 
-        public void AddAndClassify(Cell cell)
+        public void AddObjectGame(ObjectGame objectGame)
         {
-            if(cell is PlayerController)
+            if(objectGame is PlayerController)
             {
-                player = cell;
-                logic.AddToTeam(cell as IPlayable);
+                player = objectGame;
             }
-            if(cell is AIController)
+            else if(objectGame is AIController)
             {
-                enemies[cell.cellPosition] = cell;
-                logic.AddToTeam(cell as IPlayable);
+                enemies[objectGame.cellPosition] = objectGame;
             }
+            logic.AddToTeam(objectGame as IPlayable);
         }
     }
 }

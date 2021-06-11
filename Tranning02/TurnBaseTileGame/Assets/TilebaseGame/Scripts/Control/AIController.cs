@@ -4,11 +4,11 @@ using Game.Core;
 
 namespace Game.Control
 {
-    public class AIController : Cell, IPlayable
+    public class AIController : ObjectGame
     {
-        public int TeamId { get => Vars.DEFAULT_AI_TEAM_ID; }
+        public override int TeamId { get => Vars.DEFAULT_AI_TEAM_ID; }
 
-        public void DoAction()
+        public override void DoAction()
         {
             Debug.Log(name + " " + "played");
         }

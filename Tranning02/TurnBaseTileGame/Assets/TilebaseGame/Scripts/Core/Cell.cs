@@ -10,17 +10,17 @@ namespace Game.Core
 
         private void Start()
         {
-            cellPosition = GetVector2(GetGameMatrix().tilemap.WorldToCell(transform.position));
-            GetGameMatrix().AddAndClassify(this);
+            cellPosition = GetVector2(GetObjectMatrix().tilemap.WorldToCell(transform.position));
+            GetObjectMatrix().AddCell(this);
 
             ChildClassStart();
         }
 
         protected virtual void ChildClassStart() {}
 
-        private GameMatrix GetGameMatrix()
+        private ObjectMatrix GetObjectMatrix()
         {
-            return FindObjectOfType<GameMatrix>();
+            return FindObjectOfType<ObjectMatrix>();
         }
 
         private Vector2Int GetVector2(Vector3Int v)
