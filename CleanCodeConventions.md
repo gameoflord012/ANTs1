@@ -83,7 +83,7 @@ Classes and objects should have noun or noun phrase names like `Customer`, `Wiki
 Methods should have verb or verb phrase names like `postPayment`, `deletePage`, or `save`. **Accessors**, **mutators**, and **predicates** should be named for their value and prefixed with `get`, `set`, and `is`.
 
 ## Pick One Word per Concept
-For instance, it’s confusing to have fetch, retrieve, and get as equivalent methods of different classes. How do you remember which method name goes with which class
+For instance, it’s confusing to have `fetch`, `retrieve`, and `get` as equivalent methods of different classes. How do you remember which method name goes with which class
 
 ## Don’t Pun
 Avoid using the same word for two purposes. Using the same term for two different ideas is essentially a pun.
@@ -361,3 +361,116 @@ public class Assert {
    }
 ...
 ```
+
+# Chapter 4: Objects and Data Structures
+## Data Abstraction
+Both represent the data of a point on the Cartesian plane. And yet one exposes its implementation and the other completely hides it.
+
+```java
+// Abstract Point
+public interface Point {
+   double getX();
+   double getY();
+   void setCartesian(double x, double y);
+   double getR();
+   double getTheta();
+   void setPolar(double r, double theta);
+}
+```
+
+The methods enforce an access policy. You can read the individual coordinates independently, but you must set the coordinates together as an atomic operation.
+
+```java
+// Concrete Point
+public class Point {
+   public double x;
+   public double y;
+}
+```
+
+On the other hand, is very clearly implemented in rectangular coordinates, and it forces us to manipulate those coordinates independently. This exposes implementation.
+
+Hiding implementation is not just a matter of putting a layer of functions between the variables. Hiding implementation is about abstractions!
+
+## Data/Object Anti-Symmetry
+
+>Procedural code (code using data structures) makes it easy to add new functions without changing the existing data structures. OO code, on the other hand, makes it easy to add new classes without changing existing functions.
+
+The complement is also true:
+> Procedural code makes it hard to add new data structures because all the functions must change. OO code makes it hard to add new functions because all the classes must change
+
+In any complex system there are going to be times when we want to add new data types rather than new functions. For these cases objects and OO are most appropriate.
+
+## The Law of Demeter
+The Law of Demeter says that a method f of a class C should only call
+the methods of these:
+   - `C`
+   - An object created by `f`
+   - An object passed as an argument to `f`
+   - An object held in an instance variable of `C`
+
+The method should not invoke methods on objects that are returned by any of the allowed functions. In other words, talk to friends, not to strangers.
+The following code appears to violate the Law of Demeter:
+```java
+final String outputDir = ctxt.getOptions().getScratchDir().getAbsolutePath();
+```
+### Train Wrecks
+This kind of code is often called a train wreck because it look like a bunch of coupled train cars. Chains of calls like this are generally considered to be sloppy style and should be avoided.
+
+It is usually best to split them up as follows:
+```java
+Options opts = ctxt.getOptions();
+File scratchDir = opts.getScratchDir();
+final String outputDir = scratchDir.getAbsolutePath();
+```
+
+If they are objects, then their internal structure should be hidden rather than exposed, and so knowledge of their innards is a clear violation of the Law of Demeter. On the other hand, if `ctxt`, `Options`, and `ScratchDir` are just data structures with no behavior, then they naturally expose their internal structure, and so Demeter does not apply.
+```java
+final String outputDir = ctxt.options.scratchDir.absolutePath;
+```
+
+### Hybrids
+This confusion sometimes leads to unfortunate hybrid structures that are half object and half data structure.
+
+Such hybrids make it hard to add new functions but also make it hard to add new data structures. They are the worst of both worlds. Avoid creating them.
+
+### Hiding Structure
+because objects are supposed to hide their internal structure, we should not be able to navigate through them. How then would we get the absolute path of the scratch directory
+```java
+ctxt.getAbsolutePathOfScratchDirectoryOption();
+```
+or
+```java
+ctx.getScratchDirectoryOption().getAbsolutePath()
+```
+The first option could lead to an explosion of methods in the ctxt object. The second presumes that `getScratchDirectoryOption()` returns a data structure, not an object.
+
+Consider this code from (many lines farther down in) the same module:
+```java
+String outFile = outputDir + "/" + className.replace('.', '/') + ".class";
+FileOutputStream fout = new FileOutputStream(outFile);
+BufferedOutputStream bos = new BufferedOutputStream(fout);
+```
+We see that the intent of getting the absolute path of the scratch directory was to create a scratch file of a given name.
+
+If ctxt is an object, we should be telling it to do *something*. So, what if we told the ctxt object to do this?
+```java
+BufferedOutputStream bos = ctxt.createScratchFileStream(classFileName);
+```
+
+# Chapter 4: Error Handling
+## Don’t Return Null
+```java
+public void registerItem(Item item) {
+   if (item != null) {
+      ItemRegistry registry = peristentStore.getItemRegistry();
+      if (registry != null) {
+         Item existing = registry.getItem(item.getID());
+         if (existing.getBillingPeriod().hasRetailOwner()) {
+            existing.register(item);
+         }
+      }
+   }
+}
+```
+If you work in a code base with code like this, it might not look all that bad to you, but it is bad! When we return null, we are essentially creating work for ourselves and foisting problems upon our callers.
