@@ -57,7 +57,7 @@ for (int j=0; j < NUMBER_OF_TASKS; j++) {
 
 ## Avoid Encodings
 ### Member Prefixes
-- You also don’t need to prefix member variables with m_ anymore. Your classes and functions should be small enough that you don’t need them.
+You also don’t need to prefix member variables with m_ anymore. Your classes and functions should be small enough that you don’t need them.
 ```java
 public class Part {
    private String m_dsc; // The textual description
