@@ -816,3 +816,227 @@ if (!buffer.shouldNotCompact())
 ```
 
 ### G30: Functions Should Do One Thing
+It is often tempting to create functions that have multiple sections that perform a series of operations. Functions of this kind do more than one thing, and should be converted into many smaller functions, each of which does one thing.
+For example:
+```java
+public void pay() {
+   for (Employee e : employees) {
+      if (e.isPayday()) {
+         Money pay = e.calculatePay();
+         e.deliverPay(pay);
+      }
+   }
+}
+```
+---
+```java
+public void pay() {
+for (Employee e : employees)
+   payIfNecessary(e);
+}
+
+private void payIfNecessary(Employee e) {
+   if (e.isPayday())
+      calculateAndDeliverPay(e);
+}
+
+private void calculateAndDeliverPay(Employee e) {
+   Money pay = e.calculatePay();
+   e.deliverPay(pay);
+}
+```
+Each of these functions does one thing.
+
+### G31: Hidden Temporal Couplings
+[Temporal couplings](https://blog.ploeh.dk/2011/05/24/DesignSmellTemporalCoupling/) are often necessary, but you should not hide the coupling. Structure the arguments of your functions such that the order in which they should be called is obvious.
+
+Consider the following:
+
+```java
+public class MoogDiver {
+Gradient gradient;
+   List<Spline> splines;
+
+   public void dive(String reason) {
+      saturateGradient();
+      reticulateSplines();
+      diveForMoog(reason);
+      }
+   ...
+}
+```
+
+The order of the three functions is important. You must saturate the gradient before you can reticulate the splines, and only then can you dive for the moog. Unfortunately, the code does not enforce this temporal coupling.
+
+Another programmer could call `reticulateSplines` before `saturateGradient` was called, leading to an `UnsaturatedGradientException`. A better solution is:
+
+```java
+public class MoogDiver {
+   Gradient gradient;
+   List<Spline> splines;
+
+   public void dive(String reason) {
+      Gradient gradient = saturateGradient();
+      List<Spline> splines = reticulateSplines(gradient);
+      diveForMoog(splines, reason);
+      }
+   ...
+}
+```
+This exposes the temporal coupling by creating a bucket brigade. Each function produces a result that the next function needs, so there is no reasonable way to call them out of order.
+
+### G32: Don’t Be Arbitrary
+Have a reason for the way you structure your code, and make sure that reason is communicated by the structure of the code. If a structure appears arbitrary, others will feel empowered to change it. If a structure appears consistently throughout the system, others will use it and preserve the convention.
+```java
+public class AliasLinkWidget extends ParentWidget
+{
+   public static class VariableExpandingWidgetRoot {
+      ...
+
+   ...
+}
+```
+The problem with this was that `VariableExpandingWidgetRoot` had no need to be inside the scope of `AliasLinkWidget`. Moreover, other unrelated classes made use of `AliasLinkWidget`.`VariableExpandingWidgetRoot`. These classes had no need to know about `AliasLinkWidget`.
+
+### G33: Encapsulate Boundary Conditions
+Boundary conditions are hard to keep track of. Put the processing for them in one place. Don’t let them leak all over the code.
+```java
+if(level + 1 < tags.length)
+{
+   parts = new Parse(body, tags, level + 1, offset + endTag);
+   body = null;
+}
+```
+Notice that `level+1` appears twice. This is a boundary condition that should be encapsulated within a variable named something like `nextLevel`.
+```java
+int nextLevel = level + 1;
+if(nextLevel < tags.length)
+{
+   parts = new Parse(body, tags, nextLevel, offset + endTag);
+   body = null;
+}
+```
+
+### G34: Functions Should Descend Only One Level of Abstraction
+The statements within a function should all be written at the same level of abstraction, which should be one level below the operation described by the name of the function.
+
+### G35: Keep Configurable Data at High Levels
+If you have a constant such as a default or configuration value that is known and expected at a high level of abstraction, do not bury it in a low-level function. Expose it as an argument to that low-level function called from the high-level function. Consider the following code from FitNesse:
+```java
+public static void main(String[] args) throws Exception
+{
+   Arguments arguments = parseCommandLine(args);
+   ...
+}
+
+public class Arguments
+{
+   public static final String DEFAULT_PATH = ".";
+   public static final String DEFAULT_ROOT = "FitNesseRoot";
+   public static final int DEFAULT_PORT = 80;
+   public static final int DEFAULT_VERSION_DAYS = 14;
+   ...
+}
+```
+
+The command-line arguments are parsed in the very first executable line of FitNesse. The default values of those arguments are specified at the top of the Argument class. You don’t have to go looking in low levels of the system for statements like this one:
+```java
+if (arguments.port == 0) // use 80 by default
+```
+
+The configuration constants reside at a very high level and are easy to change. They get passed down to the rest of the application. The lower levels of the application do not own the values of these constants.
+
+### G36: Avoid Transitive Navigation
+If `A` collaborates with `B`, and `B` collaborates with `C`, we don’t want modules that use `A` to know about `C`.
+   > For example, we don’t want `a.getB().getC().doSomething();`.
+
+Rather we want our immediate collaborators to offer all the services we need. We should not have to roam through the object graph of the system, hunting for the method we
+want to call.
+
+ Rather we should simply be able to say:
+```java
+myCollaborator.doSomething()
+```
+
+## Names
+### N1: Choose Descriptive Names
+Don’t be too quick to choose a name. Make sure the name is descriptive. Remember that meanings tend to drift as software evolves, so frequently reevaluate the appropriateness of the names you choose.
+
+This is not just a “feel-good” recommendation. Names in software are 90 percent of what make software readable. You need to take the time to choose them wisely and keep them relevant. Names are too important to treat carelessly.
+
+### N2: Choose Names at the Appropriate Level of Abstraction
+Don’t pick names that communicate implementation; choose names the reflect the level of abstraction of the class or function you are working in.
+
+Consider the `Modem` interface below:
+```java
+public interface Modem {
+   boolean dial(String phoneNumber);
+   boolean disconnect();
+   boolean send(char c);
+   char recv();
+   String getConnectedPhoneNumber();
+}
+```
+But now consider an application in which some modems aren’t connected by `dialling`. Perhaps some are connected by sending a port number to a switch over a USB connection. Clearly the notion of phone numbers is at the wrong level of abstraction.
+
+A better naming strategy for this scenario might be:
+```java
+public interface Modem {
+   boolean connect(String connectionLocator);
+   boolean disconnect();
+   boolean send(char c);
+   char recv();
+   String getConnectedLocator();
+}
+```
+
+### N3: Use Standard Nomenclature Where Possible
+Names are easier to understand if they are based on existing convention or usage. For example, if you are using the `DECORATOR` pattern, you should use the word Decorator in the names of the decorating classes.
+
+### N4: Unambiguous Names
+Choose names that make the workings of a function or variable unambiguous.
+```java
+private String doRename() throws Exception
+{
+   if(refactorReferences)
+      renameReferences();
+   renamePage();
+
+   pathToRename.removeNameFromEnd();
+   pathToRename.addNameToEnd(newName);
+   return PathParser.render(pathToRename);
+}
+```
+
+The name of this function does not say what the function does except in broad and vague terms. This is emphasized by the fact that there is a function named `renamePage` inside the function named `doRename`! What do the names tell you about the difference between the two functions? Nothing.
+
+A better name for that function is `renamePageAndOptionallyAllReferences`. This may seem long, and it is, but it’s only called from one place in the module, so it’s explanatory value outweighs the length.
+
+### N5: Use Long Names for Long Scopes
+The longer the scope of the name, the longer and more precise the name should be.
+
+Variable names like `i` and `j` are just fine if their scope is five lines long. Consider this:
+```java
+private void rollMany(int n, int pins)
+{
+   for (int i=0; i<n; i++)
+   g.roll(pins);
+}
+```
+
+### N6: Avoid Encodings
+Names should not be encoded with type or scope information. Prefixes such as `m_` or `f` are useless in today’s environments.
+
+### N7: Names Should Describe Side-Effects
+Names should describe everything that a function, variable, or class is or does. Don’t hide side effects with a name. Don’t use a simple verb to describe a function that does more than just that simple action.
+
+For example:
+```java
+public ObjectOutputStream getOos() throws IOException {
+   if (m_oos == null) {
+      m_oos = new ObjectOutputStream(m_socket.getOutputStream());
+   }
+   return m_oos;
+}
+```
+This function does a bit more than get an “oos”; it creates the “oos” if it hasn’t been created already. Thus, a better name might be `createOrReturnOos`.
