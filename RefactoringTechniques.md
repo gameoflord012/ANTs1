@@ -220,4 +220,53 @@ class Order...
         ...
     }
 ```
-![Image](https://imgur.com/kkcRgHm)
+---
+![Image](https://i.imgur.com/kkcRgHm.png)
+
+Motivation
+- In this book I emphasize the beauty of small methods. By extracting pieces out of a large method, you make things much more comprehensible.
+
+- The difficulty in decomposing a method lies in local variables. If they are rampant, decomposition can be difficult. Using **Replace Temp with Query** helps to reduce this burden.
+
+- Applying **Replace Method with Method** Object turns all these local variables into fields on the method object. You can then use **Extract Method** on this new object to create additional methods that break down the original method.
+
+### Substitute Algorithm
+You want to replace an algorithm with one that is clearer.
+
+Replace the body of the method with the new algorithm.
+
+```java
+String foundPerson(String[] people){
+    for (int i = 0; i < people.length; i++) {
+        if (people[i].equals ("Don")) {
+            return "Don";
+        }
+        if (people[i].equals ("John")) {
+            return "John";114
+        }
+        if (people[i].equals ("Kent")) {
+            return "Kent";
+        }
+    }
+    return "";
+}
+```
+---
+```java
+String foundPerson(String[] people){
+    List candidates = Arrays.asList(new String[] {"Don", "John", "Kent"});
+
+    for (int i=0; i<people.length; i++)
+        if (candidates.contains(people[i]))
+            return people[i];
+
+    return "";
+}
+```
+
+Motivation
+- Sometimes when you want to change the algorithm to do something slightly different, it is easier to subtitute the algorithm first into something easier for the change you need to make.
+
+- Substituting a large, complex algorithm is very difficult; only by making it simple can you make the substitution tractable.
+
+## Chapter 7. Moving Features Between Objects
