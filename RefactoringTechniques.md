@@ -569,3 +569,158 @@ logical number in more than one place. If the numbers might ever change, making 
 Before you do this refactoring, you should always look for an alternative. Look at how the magic number is used. Often you can find a better way to use it. If the magic number is a type code, consider **Replace Type Code with Class**. If the magic number is the length of an array, use `anArray.length` instead.
 
 ### Encapsulate Field
+There is a public field.
+
+Make it private and provide accessors.
+
+```java
+public String _name
+```
+---
+```java
+private String _name;
+public String getName() {return _name;}
+public void setName(String arg) {_name = arg;}
+```
+
+Motivation
+- One of the principal tenets of object orientation is encapsulation, or data hiding. This says that you should never make your data public.
+
+- When you make data public, other objects can change and access data values without the owning object's knowing about it. This separates data from behavior.
+
+### Encapsulate Collection
+A method returns a collection.
+
+Make it return a read-only view and provide add/remove methods.
+
+![](https://i.imgur.com/0kXEvsb.png)
+
+Motivation
+
+Collections should use a protocol slightly different from that for other kinds of data. The getter should not return the collection object itself, because that allows clients to manipulate the contents of the collection without the owning class's knowing what is going on.
+
+In addition there should not be a setter for collection: rather there should be operations to add and remove elements.
+
+### Replace Type Code with Class
+A class has a numeric type code that does not affect its behavior.
+
+Replace the number with a new class.
+
+![](https://i.imgur.com/LpulJ8A.png)
+
+Motivation
+
+Any method that takes the type code as an argument expects a number, and there is nothing to force a symbolic name to be used. This can reduce readability and be a source of bugs.
+
+If you replace the number with a class, the compiler can type check on the class. By providing factory methods for the class, you can statically check that only valid instances are created and that those instances are passed on to the correct objects.
+
+### Replace Type Code with Subclasses
+You have an immutable type code that affects the behavior of a class.
+
+Replace the type code with subclasses.
+
+![](https://i.imgur.com/Ei3fef4.png)
+
+Motivation
+
+If you have a type code that does not affect behavior, you can use **Replace Type Code with Class**. However, if the type code affects behavior, the best thing to do is to use polymorphism to handle the variant behavior.
+
+Example
+
+I use the boring and unrealistic example of employee payment:
+
+```java
+class Employee...
+    private int _type;
+    static final int ENGINEER = 0;
+    static final int SALESMAN = 1;
+    static final int MANAGER = 2;
+
+    Employee (int type) {
+        _type = type;
+    }
+```
+The first step is to use **Self Encapsulate Field** on the type code:
+```java
+int getType() {
+    return _type;
+}
+```
+
+Because the employee's constructor uses a type code as a parameter, I need to replace it with a factory method:
+
+```java
+Employee create(int type) {
+    return new Employee(type);
+}
+
+private Employee (int type) {
+    _type = type;
+}
+```
+
+I can now start with engineer as a subclass. First I create the subclass and the overriding method for the type code:
+```java
+class Engineer extends Employee {
+    int getType() {
+        return Employee.ENGINEER;
+    }
+}
+```
+
+I also need to alter the factory method to create the appropriate object:
+
+```java
+class Employee
+    static Employee create(int type) {
+        if (type == ENGINEER) return new Engineer();
+        else return new Employee(type);
+    }
+```
+
+I continue, one by one, until all the codes are replaced with subclasses. At this point I can get rid
+of the type code field on employee and make getType an abstract method. At this point the
+factory method looks like this:
+
+```java
+abstract int getType();
+static Employee create(int type) {
+    switch (type) {
+        case ENGINEER:
+            return new Engineer();
+        case SALESMAN:
+        return new Salesman();
+        case MANAGER:
+        return new Manager();
+        default:184
+        throw new IllegalArgumentException("Incorrect type code value");
+    }
+}
+```
+
+Of course this is the kind of switch statement I would prefer to avoid. But there is only one, and it is only used at creation.
+
+### Replace Type Code with State/Strategy
+
+You have a type code that affects the behavior of a class, but you cannot use subclassing.
+
+Replace the type code with a state object
+
+![](https://i.imgur.com/z3ndxde.png)
+
+Motivation
+
+This is similar to **Replace Type Code with Subclasses**, but can be used if the type code changes during the life of the object or if another reason prevents subclassing. It uses either the state or strategy pattern [Gang of Four].
+
+If you are trying to simplify a single algorithm with **Replace Conditional with Polymorphism**, strategy is the better term. If you are going to move state-specific data and you think of the object as changing state, use the state pattern.
+
+### Replace Subclass with Fields
+You have subclasses that vary only in methods that return constant data.
+
+Change the methods to superclass fields and eliminate the subclasses.
+
+![](https://i.imgur.com/zH6dFGL.png)
+
+Motivation
+
+You can remove such subclasses completely by putting fields in the superclass. By doing that you remove the extra complexity of the subclasses.
