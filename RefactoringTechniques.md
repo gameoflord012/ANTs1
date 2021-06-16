@@ -269,4 +269,303 @@ Motivation
 
 - Substituting a large, complex algorithm is very difficult; only by making it simple can you make the substitution tractable.
 
-## Chapter 7. Moving Features Between Objects
+## Chapter 2. Moving Features Between Objects
+### Move Method
+A method is, or will be, using or used by more features of another class than the class on which it is defined.
+
+Create a new method with a similar body in the class it uses most. Either turn the old method into a simple delegation, or remove it altogether.
+
+![](https://i.imgur.com/AlRVIxg.png)
+
+Motivation
+- I move methods when classes have too much behavior or when classes are collaborating too much and are too highly coupled.
+
+- I usually look through the methods on a class to find a method that seems to reference another object more than the object it lives on.
+
+### Move Field
+A field is, or will be, used by another class more than the class on which it is defined.
+
+Create a new field in the target class, and change all its users.
+
+![](https://i.imgur.com/ByMlrrJ.png)
+
+Motivation
+
+- I consider moving a field if I see more methods on another class using the field than the class itself.
+
+- Another reason for field moving is when doing **Extract Class**. In that case the fields go first and then the methods.
+
+### Extract Class
+You have one class doing work that should be done by two.
+
+Create a new class and move the relevant fields and methods from the old class into the new class.
+
+Motivation
+
+- Such a class is one with many methods and quite a lot of data. A good sign is that a subset of the data and a subset of the methods seem to go together.
+
+### Inline Class
+A class isn't doing very much.
+
+Move all its features into another class and delete it.
+
+![](https://i.imgur.com/QMnkaIU.png)
+
+Motivation
+
+- Inline Class is the reverse of Extract Class. I use Inline Class if a class is no longer pulling its weight and shouldn't be around any more
+
+- Often this is the result of refactoring that moves other responsibilities out of the class so there is little left.
+
+### Hide Delegate
+A client is calling a delegate class of an object.
+
+Create methods on the server to hide the delegate.
+
+![](https://i.imgur.com/oFuk8jJ.png)
+
+Motivation
+- Encapsulation means that objects need to know less about other parts of the system. Then when things change, fewer objects need to be told about the change.
+
+- If a client calls a method defined on one of the fields of the server object, the client needs to know about this delegate object. If the delegate changes, the client also may have to change.
+    > You can remove this dependency by placing a simple delegating method on the server, which hides the delegate `(Figure 7.1)`. Changes become limited to the server and don't propagate to the client.
+
+    ![](https://i.imgur.com/nyDxS85.png)
+
+### Remove Middle Man
+A class is doing too much simple delegation.
+
+Get the client to call the delegate directly.
+
+![](https://i.imgur.com/tmaKxkW.png)
+
+Motivation
+- Every time the client wants to use a new feature of the delegate, you have to add a simple delegating method to the server. After adding features for a while, it becomes painful and perhaps it's time for the client to call the delegate directly.
+
+### Introduce Foreign Method
+```java
+Date newStart = new Date (previousEnd.getYear(),
+    previousEnd.getMonth(), previousEnd.getDate() + 1);
+```
+---
+```java
+Date newStart = nextDay(previousEnd);
+
+private static Date nextDay(Date arg) {
+    return new Date (arg.getYear(),arg.getMonth(), arg.getDate() + 1);
+}
+```
+
+Motivation
+- You are using this really nice class that gives you all these great services. Then there is one service it doesn't give you but should.
+
+### Introduce Local Extension
+A server class you are using needs several additional methods, but you can't modify the class.
+
+Create a new class that contains these extra methods. Make this extension class a subclass or a wrapper of the original.
+
+![](https://i.imgur.com/9wvshMf.png)
+
+Motivation
+- If you need one or two methods, you can use **Introduce Foreign Method**. Once you get beyond a couple of these methods, however, they get out of hand.
+
+## Chapter 3. Organizing Data
+
+### Self Encapsulate Field
+```java
+private int _low, _high;
+boolean includes (int arg) {
+    return arg >= _low && arg <= _high;
+}
+```
+---
+```java
+private int _low, _high;
+boolean includes (int arg) {
+    return arg >= getLow() && arg <= getHigh();
+}
+int getLow() {return _low;}
+int getHigh() {return _high;}
+```
+
+Motivation
+- The advantages of *indirect variable access* are that it allows a subclass to override how to get that information with a method and that it supports more flexibility in managing the data.
+    > Such as lazy initialization, which initializes the value only when you need to use it.
+
+- The advantage of direct variable access is that the code is easier to read.
+
+- The most important time to use *Self Encapsulate Field* is when you are accessing a field in a superclass but you want to override this variable access with a computed value in the subclass.
+
+### Replace Data Value with Object
+You have a data item that needs additional data or behavior.
+
+Turn the data item into an object.
+
+![](https://i.imgur.com/ziO7uCQ.png)
+
+Motivation
+
+- Often in early stages of development you make decisions about representing simple facts as simple data items. As development proceeds you realize that those simple items aren't so simple anymore.
+
+### Change Value to Reference
+You have a class with many equal instances that you want to replace with a single object.
+
+Turn the object into a reference object.
+
+![](https://i.imgur.com/ElNDk3D.png)
+
+Motivation
+
+- The decision between reference and value is not always clear. Sometimes you start with a simple value with a small amount of immutable data. Then you want to give it some changeable data and ensure that the changes ripple to everyone referring to the object
+
+### Change Reference to Value
+You have a reference object that is small, immutable, and awkward to manage.
+
+Turn it into a value object.
+
+![](https://i.imgur.com/McW7e1L.png)
+
+Motivation
+
+- The trigger for going from a reference to a value is that working with the reference object becomes awkward.
+
+- An important property of value objects is that they should be *immutable*. Any time you invoke a query on one, you should get the same result.
+    > It's important to be clear on what immutable means. If you have a money class with a currency and a value, that's usually an immutable value object. That does not mean your salary cannot change. It means that to change your salary, you need to replace the existing money object with a new money object rather than changing the amount on an exisiting money object.
+
+### Replace Array with Object
+You have an array in which certain elements mean different things.
+
+Replace the array with an object that has a field for each element.
+
+```java
+String[] row = new String[3];
+row [0] = "Liverpool";
+row [1] = "15";
+```
+---
+```java
+Performance row = new Performance();
+row.setName("Liverpool");
+row.setWins("15");
+```
+
+Motivation
+-   Arrays are a common structure for organizing data. However, they should be used only to contain a collection of similar objects in some order.
+    > Sometimes, however, you see them used to contain a number of different things. Conventions such as "the first element on the array is the person's name" are hard to remember.
+
+    With an object you can use names of fields and methods to convey
+    this information so you don't have to remember it.
+
+### Duplicate Observed Data (Unnecessary, Here For Fun)
+You have domain data available only in a GUI control, and domain methods need access.
+
+Copy the data to a domain object. Set up an observer to synchronize the two pieces of data.
+
+![](https://i.imgur.com/xgsWj98.png)
+
+Motivation
+
+- A well-layered system separates code that handles the user interface from code that handles the business logic. It does this for several reasons. You may want several interfaces for similar business logic; the user interface becomes too complicated if it does both; it is easier to maintain and evolve domain objects separate from the GUI; or you may have different developers handling the different pieces.
+
+- Although the behavior can be separated easily, the data often cannot. Data needs to be embedded in GUI control that has the same meaning as data that lives in the domain model. User interface frameworks, from model-view-controller (MVC) onward, used a multitiered ystem to provide mechanisms to allow you to provide this data and keep everything in sync.
+
+- If you come across code that has been developed with a two-tiered approach in which business logic is embedded into the user interface, you need to separate the behaviors. Much of this is about decomposing and moving methods. For the data, however, you cannot just move the data, you have to duplicate it and provide the synchronization mechanism.
+
+### Change Unidirectional Association to Bidirectional
+You have two classes that need to use each other's features, but there is only a one-way link.
+
+Add back pointers, and change modifiers to update both sets
+
+![](https://i.imgur.com/x9G75k3.png)
+
+Example
+
+A simple program has an order that refers to a customer:
+```java
+class Order...
+    Customer getCustomer() {
+        return _customer;
+    }
+
+    void setCustomer (Customer arg) {
+        _customer = arg;
+    }
+    Customer _customer;
+```
+
+The customer class has no reference to the order.
+
+As a customer can have several orders, so this field is a collection. Because I don't want a customer to have the same order more than once in its collection, the correct collection is a set:
+```java
+class Customer {
+    private Set _
+```
+
+Now I need to decide which class will take charge of the association. My decision process runs as follows:
+
+1. If both objects are reference objects and the association is one to many, then the object that has the one reference is the controller. (That is, if one customer has many orders, the order controls the association.)
+
+2. If one object is a component of the other, the composite should control the association.
+
+3. If both objects are reference objects and the association is many to many, it doesn't matter whether the order or the customer controls the association.
+
+Because the order will take charge, I need to add a helper method to the customer that allows direct access to the orders collection.
+
+I use the name friendOrders to signal that this method is to be used only in this special case. I also minimize its visibility by making it package visibility if at all possible.
+```java
+class Customer...
+Set friendOrders() {
+    /** should only be used by Order when modifying the association */
+    return _orders;
+}
+```
+
+Now I update the modifier to update the back pointers:
+```java
+class Order...
+    void setCustomer (Customer arg) ...
+        if (_customer != null) _customer.friendOrders().remove(this);
+        _customer = arg;
+        if (_customer != null) _customer.friendOrders().add(this);
+}
+```
+
+### Change Bidirectional Association to Unidirectional
+You have a two-way association but one class no longer needs features from the other.
+
+Drop the unneeded end of the association
+
+Motivation
+
+Bidirectional associations are useful, but they carry a price. The price is the added complexity of maintaining the two-way links and ensuring that objects are properly created and removed.
+
+Bidirectional associations are not natural for many programmers, so they often are a source of errors.
+
+Lots of two-way links also make it easy for mistakes to lead to zombies: objects that should be dead but still hang around because of a reference that was not cleared.
+
+Bidirectional associations force an interdependency between the two classes. Any change to one class may cause a change to another.
+
+You should use bidirectional associations when you need to but not when you don't. As soon as you see a bidirectional association is no longer pulling its weight, drop the unnecessary end.
+
+### Replace Magic Number with Symbolic Constant
+```java
+double potentialEnergy(double mass, double height) {
+    return mass * 9.81 * height;
+}
+```
+---
+```java
+double potentialEnergy(double mass, double height) {
+    return mass * GRAVITATIONAL_CONSTANT * height;
+}
+static final double GRAVITATIONAL_CONSTANT = 9.81;
+```
+
+Motivation
+
+Magic numbers are really nasty when you need to reference the same
+logical number in more than one place. If the numbers might ever change, making the change is a nightmare.
+
+Before you do this refactoring, you should always look for an alternative. Look at how the magic number is used. Often you can find a better way to use it. If the magic number is a type code, consider **Replace Type Code with Class**. If the magic number is the length of an array, use `anArray.length` instead.
+
+### Encapsulate Field
