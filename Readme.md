@@ -28,3 +28,7 @@ Version 2019.4.27f1
   [Range(0f, 1f)] 
   public float airborneDecelProportion;
   ```
+ - `Static` key word should be before `Accessibility`
+  ```c#
+  static protected PlayerCharacter playerInstance;
+  ```
