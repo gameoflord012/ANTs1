@@ -12,6 +12,8 @@ Version 2019.4.27f1
 1. SerializeField
 2. Events
 3. Enums
-4. public static
-5. Unity event functions (ie. `Update()`, `Start()`)
-6. Class behaviours is the last and order base on decreasing level of abstraction rule.
+4. Public static
+5. Variables (order by accessibility
+6. Constructor
+7. Unity event functions (ie. `Update()`, `Start()`)
+8. Class behaviours is the last and order base on decreasing level of abstraction rule.
