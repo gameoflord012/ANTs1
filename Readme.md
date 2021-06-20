@@ -22,4 +22,9 @@ Version 2019.4.27f1
 9. Class behaviours is the last and order base on decreasing level of abstraction rule.
 
 ### Note
-Every elements must have accessibility keyword (Except for **SerializeField** is always private).
+- Every elements must have accessibility keyword (Except for **SerializeField** is always private).
+- All elements are attached to an `attributes` must be on newline.
+  ```c#
+  [Range(0f, 1f)] 
+  public float airborneDecelProportion;
+  ```
