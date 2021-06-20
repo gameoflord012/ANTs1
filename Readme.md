@@ -6,7 +6,7 @@ Version 2019.4.27f1
 
 [Refactoring Techniques](https://github.com/gameoflord012/ANTs1/blob/main/RefactoringTechniques.md)
 
-# Code Convetions
+# Style Guidelines
 ## Order of elements in class
 1. Events.
 2. SerializeField (Should be alway `private`, and should not contain keyword `private`, if need public accessibility use `getter` and `setter`).
