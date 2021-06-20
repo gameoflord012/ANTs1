@@ -28,7 +28,7 @@ Version 2019.4.27f1
   [Range(0f, 1f)] 
   public float airborneDecelProportion;
   ```
-- `Static` key word should stay before `Accessibility`.
+- `Static` keyword should stay before `Accessibility`.
 
   ```c#
   static protected PlayerCharacter playerInstance;
