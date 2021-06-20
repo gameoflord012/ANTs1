@@ -8,7 +8,7 @@ Version 2019.4.27f1
 [Link](https://github.com/gameoflord012/ANTs1/blob/main/RefactoringTechniques.md)
 
 # Code Convetions
-## Order of element in class
+## Order of elements in class
 1. SerializeField
 2. Events
 3. Enums
