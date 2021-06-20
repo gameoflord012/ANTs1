@@ -22,7 +22,7 @@ Version 2019.4.27f1
 
 ### Note
 - Every elements must have accessibility keyword (Except for _SerializeField_ is always private).
-- All elements are attached to an _Attributes_ must be on newline, Except for _SerializeField_ attribute.
+- All elements are attached to an _Attributes_ must be on newline, except for _SerializeField_ attribute.
   ```c#
   [SerializeField] float timeBetweenFire = 0.5f;
   
