@@ -21,15 +21,15 @@ Version 2019.4.27f1
 9. Class behaviours is the last and order base on decreasing level of abstraction rule.
 
 ### Note
-- Every elements must have accessibility keyword (Except for **SerializeField** is always private).
-- All elements are attached to an `attributes` must be on newline, Except for `SerializeField` attribute.
+- Every elements must have accessibility keyword (Except for _SerializeField_ is always private).
+- All elements are attached to an _Attributes_ must be on newline, Except for _SerializeField_ attribute.
   ```c#
   [SerializeField] float timeBetweenFire = 0.5f;
   
   [Range(0f, 1f)] 
   public float airborneDecelProportion;
   ```
-- `Static` keyword should stay before `Accessibility`.
+- **Static** keyword should stay before _Accessibility_.
 
   ```c#
   static protected PlayerCharacter playerInstance;
