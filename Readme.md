@@ -22,4 +22,4 @@ Version 2019.4.27f1
 9. Class behaviours is the last and order base on decreasing level of abstraction rule.
 
 ### Note
-**Statics**, **Variables** and **Class behaviours** must have accessibility keyword.
+Every elements must have accessibility keyword (Excepts for **SerializeField** is always private).
