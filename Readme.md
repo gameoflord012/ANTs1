@@ -9,8 +9,8 @@ Version 2019.4.27f1
 
 # Code Convetions
 ## Order of elements in class
-1. SerializeField
-2. Events
+1. Events
+2. SerializeField (Should be alway `private`, if need to change to public add `getter` and `setter`)
 3. Enums
 4. Statics (order by accessibility)
 5. Variables (order by accessibility)
