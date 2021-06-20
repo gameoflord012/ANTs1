@@ -1,11 +1,10 @@
 # Build with Unity
 Version 2019.4.27f1
 
-# Clean Code Books
-[Link](https://github.com/gameoflord012/ANTs1/blob/main/CleanCodeConventions.md)
+# Books
+[Clean Code](https://github.com/gameoflord012/ANTs1/blob/main/CleanCodeConventions.md)
 
-# Refactoring Techniques
-[Link](https://github.com/gameoflord012/ANTs1/blob/main/RefactoringTechniques.md)
+[Refactoring Techniques](https://github.com/gameoflord012/ANTs1/blob/main/RefactoringTechniques.md)
 
 # Code Convetions
 ## Order of elements in class
