@@ -7,7 +7,8 @@ Version 2019.4.27f1
 [Refactoring Techniques](https://github.com/gameoflord012/ANTs1/blob/main/RefactoringTechniques.md)
 
 # Style Guidelines
-## Order of elements in class
+## Orders
+### Order of elements in class
 1. Events.
 2. SerializeField (Should be alway `private`, and should not contain keyword `private`, if need public accessibility use `getter` and `setter`).
 3. Enums (ODA ie. Order of Decreasing Accessibility).
@@ -21,7 +22,7 @@ Version 2019.4.27f1
 9. Custome event functions (ie. `OnMaxHealthUpdate`, `OnBulletFire`)
 10. Class behaviours is the last and order base on decreasing level of abstraction rule.
 
-### Note
+#### Note
 - Every elements must have accessibility keyword (Except for _SerializeField_ is always private).
 - All elements are attached to an _Attributes_ must be on newline, except for _SerializeField_ attribute.
   ```c#
@@ -35,7 +36,16 @@ Version 2019.4.27f1
   ```c#
   static protected PlayerCharacter playerInstance;
   ```
-## Namespace order
+### Namespace order
 1. System
 2. Unity
 3. Project dependencies
+
+## Unity tips
+`GetComponent` should be call on `Awake` event
+```c#
+private void Awake()
+{
+  mover = GetComponent<Mover>();
+}
+```
