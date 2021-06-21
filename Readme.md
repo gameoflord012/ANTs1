@@ -17,8 +17,9 @@ Version 2019.4.27f1
 ---
 6. Getters and Setters.
 7. Constructors.
-8. Unity event functions (ie. `Update()`, `Start()`).
-9. Class behaviours is the last and order base on decreasing level of abstraction rule.
+8. Unity event functions (ie. `Update()`, `Start()`, `OnColliderEnter2d`).
+9. Custome event functions (ie. `OnMaxHealthUpdate`, `OnBulletFire`)
+10. Class behaviours is the last and order base on decreasing level of abstraction rule.
 
 ### Note
 - Every elements must have accessibility keyword (Except for _SerializeField_ is always private).
