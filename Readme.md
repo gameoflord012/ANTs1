@@ -35,3 +35,7 @@ Version 2019.4.27f1
   ```c#
   static protected PlayerCharacter playerInstance;
   ```
+## Namespace order
+1. System
+2. Unity
+3. Project dependencies
