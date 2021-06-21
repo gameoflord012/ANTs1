@@ -49,3 +49,22 @@ private void Awake()
   mover = GetComponent<Mover>();
 }
 ```
+
+Don't return _null_ instead return _empty_ or _throw UnityException_
+```c#
+public DogBreed CreateDog(string s)
+{
+  switch(s)
+  {
+    case "Chihuahua":
+      return new Chihuahua();
+      break;
+    case "ShibaInu":
+      return new ShibaInu();
+      break;
+    default:
+      // Instead of return null throw exception
+      return new UnityException("Invalid dog breed!");
+  }
+}
+```
