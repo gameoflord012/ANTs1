@@ -8,7 +8,7 @@ Version 2019.4.27f1
 
 # Style Guidelines
 ## Orders
-### Order of elements in class
+### Elements in class
 1. Events.
 2. Enums (ODA ie. Order of Decreasing Accessibility).
 3. SerializeField (Should be alway `private`, and should not contain keyword `private`, if need public accessibility use `getter` and `setter`).
@@ -37,11 +37,15 @@ Version 2019.4.27f1
   ```c#
   static protected PlayerCharacter playerInstance;
   ```
-### Namespace order
+### Namespace
 1. System
 2. Unity
 3. Project dependencies
-
+```c#
+using System.Collections.Generic
+using UnityEngine
+using ANTs.Core
+```
 ## Instantiate
 All _instantiate_ `GameObject` must be controlled by object pooling.
 
