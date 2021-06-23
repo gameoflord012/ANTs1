@@ -23,6 +23,7 @@ Version 2019.4.27f1
 10. Class behaviours is the last and order base on decreasing level of abstraction rule.
 
 #### Note
+- [Example](https://ideone.com/3B85py) of good script.
 - Every elements must have accessibility keyword (Except for _SerializeField_ is always private).
 - All elements are attached to an _Attributes_ must be on newline, except for _SerializeField_ attribute.
   ```c#
@@ -40,6 +41,9 @@ Version 2019.4.27f1
 1. System
 2. Unity
 3. Project dependencies
+
+## Instantiate
+All _instantiate_ `GameObject` must be controlled by object pooling.
 
 ## Unity tips
 `GetComponent` should be call on `Awake` event
