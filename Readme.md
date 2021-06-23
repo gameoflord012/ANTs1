@@ -23,7 +23,7 @@ Version 2019.4.27f1
 10. Class behaviours is the last and order base on decreasing level of abstraction rule.
 
 #### Note
-- [Example](https://ideone.com/3B85py) of good script.
+- Example of [good script](https://ideone.com/3B85py).
 - Every elements must have accessibility keyword (Except for _SerializeField_ is always private).
 - All elements are attached to an _Attributes_ must be on newline, except for _SerializeField_ attribute.
   ```c#
