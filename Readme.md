@@ -6,6 +6,9 @@ Version 2019.4.27f1
 
 [Refactoring Techniques](https://github.com/gameoflord012/ANTs1/blob/main/RefactoringTechniques.md)
 
+# Useful resources
+https://forum.unity.com/threads/serialization-best-practices-megapost.155352/
+
 # Style Guidelines
 ## Orders
 ### Elements in class
