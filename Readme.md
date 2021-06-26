@@ -93,13 +93,3 @@ public DogBreed CreateDog(string s)
   }
 }
 ```
-
-Use `[Space]` to seperate _SerializeField_
-```c#
-[SerializeField] float timeBetweenFire = 0.5f;
-[Space]
-[Tooltip("Initial gun type for gunner")]
-[SerializeField] Gun initialGunPrefab;
-[Tooltip("Initial bullet type for gunner")]
-[SerializeField] BulletPool initialBulletPool;
-```
