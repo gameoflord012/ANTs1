@@ -49,7 +49,7 @@ using ANTs.Core
 ## Instantiate
 All _instantiate_ `GameObject` must be controlled by object pooling.
 
-## Unity tips
+## Awake and Start
 `GetComponent` should be call on `Awake` event
 ```c#
 private void Awake()
@@ -57,6 +57,17 @@ private void Awake()
   mover = GetComponent<Mover>();
 }
 ```
+
+If a class call another class, prefer `Start()`
+```c#
+protected virtual void Start()
+{
+  if (actionStartOnPlay)
+    GetComponent<ActionScheduler>().Trigger(this);
+}
+```
+
+## Unity tips
 
 Don't return _null_ instead return _empty_ or _throw UnityException_
 ```c#
