@@ -2,9 +2,8 @@
 Version 2019.4.27f1
 
 # Books
-[Clean Code](https://github.com/gameoflord012/ANTs1/blob/main/CleanCodeConventions.md)
-
-[Refactoring Techniques](https://github.com/gameoflord012/ANTs1/blob/main/RefactoringTechniques.md)
+- [Clean Code](https://github.com/gameoflord012/ANTs1/blob/main/CleanCodeConventions.md)
+- [Refactoring Techniques](https://github.com/gameoflord012/ANTs1/blob/main/RefactoringTechniques.md)
 
 # Useful resources
 - https://forum.unity.com/threads/serialization-best-practices-megapost.155352/
