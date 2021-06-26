@@ -46,6 +46,8 @@ using System.Collections.Generic
 using UnityEngine
 using ANTs.Core
 ```
+In visual studio, use shortcut _ctrl + R + G_ to remove unused dependencies.
+
 ## Instantiate
 All _instantiate_ `GameObject` must be controlled by object pooling.
 
