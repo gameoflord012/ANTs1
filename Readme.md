@@ -17,7 +17,7 @@ Version 2019.4.27f1
 2. Enums (ODA ie. Order of Decreasing Accessibility).
 3. SerializeField (Should be alway `private`, and should not contain keyword `private`, if need public accessibility use `getter` and `setter`).
 4. Structs (ODA).
-5. Statics (ODA).
+5. Static Variables (ODA).
 6. Variables (ODA).
 ---
 6. Getters and Setters.
