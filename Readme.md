@@ -9,6 +9,7 @@ Version 2019.4.27f1
 - https://forum.unity.com/threads/serialization-best-practices-megapost.155352/
 - https://catlikecoding.com/
 - https://www.reddit.com/r/roguelikedev/wiki/faq_friday
+- https://blog.unity.com/technology/unity-serialization
 
 # Style Guidelines
 ## Orders
