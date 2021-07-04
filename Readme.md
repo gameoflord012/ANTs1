@@ -6,7 +6,6 @@ Version 2019.4.27f1
 - [Refactoring Techniques](https://github.com/gameoflord012/ANTs1/blob/main/RefactoringTechniques.md)
 
 # Useful resources
-- https://forum.unity.com/threads/serialization-best-practices-megapost.155352/
 - https://catlikecoding.com/
 - https://www.reddit.com/r/roguelikedev/wiki/faq_friday
 - https://blog.unity.com/technology/unity-serialization
