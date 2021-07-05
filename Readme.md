@@ -93,3 +93,15 @@ public DogBreed CreateDog(string s)
   }
 }
 ```
+
+### Casting
+It's recommended to use safely cast rather than return null cast
+
+prefer this
+```C#
+ProjectileWeapon pWeapon = (ProjectileWeapon)weapon;
+```
+rather this
+```C#
+ProjectileWeapon pWeapon = weapon as ProjectileWeapon
+```
