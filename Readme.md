@@ -57,8 +57,8 @@ In visual studio, use shortcut _ctrl + R + G_ to remove unused dependencies.
 All _instantiate_ `GameObject` must be controlled by object pooling.
 
 ## Awake and Start
-- Methods shouldn't be called from `Awake`.
-- Variables shound't be initialized on `Start`.
+- Uncontrolled _methods_ shouldn't be called by `Awake`.
+- Uncontrolled _variables_ shound't be initialized on `Start`.
 - If variable must be initialized on `Start`, use **lazy initialization**.
 
 ## Unity tips
