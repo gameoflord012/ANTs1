@@ -58,7 +58,8 @@ All _instantiate_ `GameObject` must be controlled by object pooling.
 
 ## Awake and Start
 - Methods shouldn't be called from `Awake`.
-- Variables shound't be initialized on `Start`
+- Variables shound't be initialized on `Start`.
+- If variable must be initialized on `Start`, use **lazy initialization**.
 
 ## Unity tips
 
