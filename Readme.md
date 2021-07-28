@@ -10,6 +10,7 @@ Version 2019.4.27f1
 - https://www.reddit.com/r/roguelikedev/wiki/faq_friday
 - https://blog.unity.com/technology/unity-serialization
 - https://learn.unity.com/tutorial/assets-resources-and-assetbundles/?tab=overview#5c7f8528edbc2a002053b5a6
+- https://www.tutorialsteacher.com/ioc/dependency-injection
 
 # Style Guidelines
 ## Orders
