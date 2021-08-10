@@ -21,6 +21,17 @@ Version 2019.4.27f1
 - https://realtimevfx.com/t/getting-started-in-real-time-vfx-start-here/3415
 - https://www.youtube.com/results?search_query=ImbueFX+
 
+## Udemy Courses
+- https://www.udemy.com/share/101Ak22@Pm5jVGJbSFAHdk5GBmJNfj4=/
+- https://www.udemy.com/share/101XWK2@PW5gfWFbSFAHdk5GBktnfj5H/
+- https://www.udemy.com/share/103t142@PW1jV1pYT1wLe0JGO0tNfQ==/
+- https://www.udemy.com/share/101WYy2@Pm5jfWFgS1cLekNKBnZOVD1tYH0=/
+- https://www.udemy.com/share/103CaS2@FG5jV0tbSFAHdk5GBktnVA==/
+- https://www.udemy.com/share/104YJK2@FEdKV2FKWlQMdk9HCnZzVD1HYw==/
+- https://www.udemy.com/share/102Abi2@PW5KfVpYT1wLe0JGOEhO/
+- https://www.udemy.com/share/101Xwc2@PW1KVGJbSFAHdk5GBkhOfT5t/
+- https://www.udemy.com/share/1020ki2@Pm1gVFpYT1wLe0JGO2Jnfg==/
+
 # Style Guidelines
 ## Orders
 ### Elements in class
