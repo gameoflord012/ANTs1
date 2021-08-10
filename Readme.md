@@ -14,6 +14,13 @@ Version 2019.4.27f1
 - https://docs.unity3d.com/Manual/ConfigurableEnterPlayMode.html
 - https://www.youtube.com/watch?v=9tjYz6Ab0oc
 
+## VFX
+- https://realtimevfx.com/t/artistic-principles-of-vfx/4081
+- https://www.artstation.com/
+- https://www.youtube.com/playlist?list=PLQD_sA-R5qVKVYw3EVuRT7fSJsVukLEhD
+- https://realtimevfx.com/t/getting-started-in-real-time-vfx-start-here/3415
+- https://www.youtube.com/results?search_query=ImbueFX+
+
 # Style Guidelines
 ## Orders
 ### Elements in class
