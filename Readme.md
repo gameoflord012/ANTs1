@@ -13,6 +13,7 @@ Version 2019.4.27f1
 - https://www.tutorialsteacher.com/ioc/dependency-injection
 - https://docs.unity3d.com/Manual/ConfigurableEnterPlayMode.html
 - https://www.youtube.com/watch?v=9tjYz6Ab0oc
+- https://gamedevelopment.tutsplus.com/tutorials/goal-oriented-action-planning-for-a-smarter-ai--cms-20793
 
 ## VFX
 - https://realtimevfx.com/t/artistic-principles-of-vfx/4081
